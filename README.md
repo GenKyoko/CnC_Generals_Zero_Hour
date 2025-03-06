@@ -3,24 +3,27 @@
 
 This repository includes source code for Command & Conquer Generals, and its expansion pack Zero Hour. This release provides support to the Steam Workshop for both games ([C&C Generals](https://steamcommunity.com/workshop/browse/?appid=2229870) and [C&C Generals - Zero Hour](https://steamcommunity.com/workshop/browse/?appid=2732960)).
 
+## 鸣谢/Credits
+CN
+- jmarshall2323, jmarshall23, andrew-2e128 仓库创建者或者是参与维护者 ([jmarshall2323/CnC_Generals_Zero_Hour](https://github.com/jmarshall2323/CnC_Generals_Zero_Hour)) 本仓库大量补丁来自于该分支。
 
-## Dependencies
+EN
+- jmarshall2323, jmarshall23, andrew-2e128 The creator of the forked repository or the contributor maintainer. ([jmarshall2323/CnC_Generals_Zero_Hour](https://github.com/jmarshall2323/CnC_Generals_Zero_Hour)) A lot of the patches in this repository come from this branch.
 
-If you wish to rebuild the source code and tools successfully you will need to find or write new replacements (or remove the code using them entirely) for the following libraries;
+## 警告/warning
+目前该分支存在着大量严重问题，包括但不限于：
+- 在主菜单界面点击“退出游戏”时“D3DTexture”会出现释放问题，导致游戏崩溃。
+- 游戏崩溃有时会以奇怪的姿势发生
 
-- DirectX SDK (Version 9.0 or higher) (expected path `\Code\Libraries\DirectX\`)
-- STLport (4.5.3) - (expected path `\Code\Libraries\STLport-4.5.3`)
-- 3DSMax 4 SDK - (expected path `\Code\Libraries\Max4SDK\`)
-- NVASM - (expected path `\Code\Tools\NVASM\`)
-- BYTEmark - (expected path `\Code\Libraries\Source\Benchmark`)
-- RAD Miles Sound System SDK - (expected path `\Code\Libraries\Source\WWVegas\Miles6\`)
-- RAD Bink SDK - (expected path `\Code\GameEngineDevice\Include\VideoDevice\Bink`)
-- SafeDisk API - (expected path `\Code\GameEngine\Include\Common\SafeDisk` and `\Code\Tools\Launcher\SafeDisk\`)
-- Miles Sound System "Asimp3" - (expected path `\Code\Libraries\WPAudio\Asimp3`)
-- GameSpy SDK - (expected path `\Code\Libraries\Source\GameSpy\`)
-- ZLib (1.1.4) - (expected path `\Code\Libraries\Source\Compression\ZLib\`)
-- LZH-Light (1.0) - (expected path `\Code\Libraries\Source\Compression\LZHCompress\CompLibSource` and `CompLibHeader`)
+EN
+There are currently a number of serious issues with the branch, including but not limited to:
+- When you click "Exit Game" on the main menu screen, "D3DTexture" will have a release issue, causing the game to crash.
+- Some game crashes are difficult to locate.
 
+## 依赖/Dependencies
+该分支已经集成了大量依赖，无需额外添加。
+
+The branch already has a large number of dependencies integrated and no additional additions are required.
 
 ## Compiling (Win32 Only)
 
@@ -35,14 +38,9 @@ NOTE: As modern versions of MSVC enforce newer revisions of the C++ standard, yo
 When the workspace has finished building, the compiled binaries will be copied to the folder called `/Run/` found in the root of each games directory. 
 
 
-## Known Issues
+## Known Issues(old)
 
 Windows has a policy where executables that contain words “version”, “update” or “install” in their filename will require UAC Elevation to run. This will affect “versionUpdate” and “buildVersionUpdate” projects from running as post-build events. Renaming the output binary name for these projects to not include these words should resolve the issue for you.
-
-
-## STLport
-STLport will require changes to successfully compile this source code. The file [stlport.diff](stlport.diff) has been provided for you so you can review and apply these changes. Please make sure you are using STLport 4.5.3 before attempting to apply the patch.
-
 
 ## Contributing
 
