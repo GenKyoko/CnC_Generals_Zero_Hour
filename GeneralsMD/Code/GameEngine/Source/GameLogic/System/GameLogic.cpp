@@ -2830,7 +2830,7 @@ Int GameLogic::rebalanceChildSleepyUpdate(Int i)
 // balance down, not up), so this one is hand-unrolled for
 // max efficiency. I have left the pristine non-unrolled
 // version present for clarity. (Yes, this is worth doing.) (srj) 
-#if 1
+#if 0
 	UpdateModulePtr* pI = &m_sleepyUpdates[i];
 
 	// our children are i*2 and i*2+1
@@ -3877,7 +3877,8 @@ void GameLogic::removeObjectFromLookupTable( Object *obj )
 
 	// remove from lookup table
 //	m_objHash.erase( obj->getID() );
-	m_objVector[ obj->getID() ] = NULL;
+	if(obj->getID() < m_objVector.size())
+		m_objVector[ obj->getID() ] = NULL;
 
 }  // end removeObjectFromLookupTable
 

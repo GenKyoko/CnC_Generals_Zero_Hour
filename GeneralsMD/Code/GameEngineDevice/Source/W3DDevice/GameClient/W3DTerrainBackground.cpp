@@ -55,8 +55,7 @@
 #include "GameClient/View.h"
 #include "W3DDevice/GameClient/TerrainTex.h"
 #include "W3DDevice/GameClient/HeightMap.h"
-#include "WW3D2/DX8Wrapper.h"
-#include "WW3D2/DX8Renderer.h"
+#include "GameRenderer.h"
 #include "WW3D2/Camera.h"
 
 #ifdef _INTERNAL

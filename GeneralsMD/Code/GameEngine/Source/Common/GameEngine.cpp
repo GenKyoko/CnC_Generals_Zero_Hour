@@ -43,7 +43,7 @@
 #include "Common/MessageStream.h"
 #include "Common/ThingFactory.h"
 #include "Common/File.h"
-#include "Common/FileSystem.h"
+#include "Common/FileSystemEA.h"
 #include "Common/ArchiveFileSystem.h"
 #include "Common/LocalFileSystem.h"
 #include "Common/CDManager.h"
@@ -250,7 +250,7 @@ void GameEngine::setFramesPerSecondLimit( Int fps )
 void GameEngine::init( void ) {} /// @todo: I changed this to take argc & argv so we can parse those after the GDF is loaded.  We need to rethink this immediately as it is a nasty hack
 void GameEngine::init( int argc, char *argv[] )
 {
-	try {
+	//try {
 		//create an INI object to use for loading stuff
 		INI ini;
 
@@ -577,7 +577,8 @@ void GameEngine::init( int argc, char *argv[] )
 
 		// for fingerprinting, we need to ensure the presence of these files
 
-
+		// jmarshall - loose files
+#if 0
 #if !defined(_INTERNAL) && !defined(_DEBUG)
 		AsciiString dirName;
     dirName = TheArchiveFileSystem->getArchiveFilenameForFile("generalsbzh.sec");
@@ -600,7 +601,7 @@ void GameEngine::init( int argc, char *argv[] )
 			m_quitting = TRUE;
 		}
 #endif
-
+#endif
 
 		// initialize the MapCache
 		TheMapCache = MSGNEW("GameEngineSubsystem") MapCache;
@@ -671,7 +672,7 @@ void GameEngine::init( int argc, char *argv[] )
 
 		//initDisabledMasks();
 		
-	}
+	/*}
 	catch (ErrorCode ec)
 	{
 		if (ec == ERROR_INVALID_D3D)
@@ -690,7 +691,7 @@ void GameEngine::init( int argc, char *argv[] )
 	catch (...)
 	{
 		RELEASE_CRASH(("Uncaught Exception during initialization."));
-	}
+	}*/
 
 	if(!TheGlobalData->m_playIntro)
 		TheWritableGlobalData->m_afterIntro = TRUE;
@@ -760,7 +761,7 @@ void GameEngine::update( void )
 			TheAudio->UPDATE();
 			TheGameClient->UPDATE();
 			TheMessageStream->propagateMessages();
-
+			
 			if (TheNetwork != NULL)
 			{
 				TheNetwork->UPDATE();
@@ -830,32 +831,32 @@ void GameEngine::execute( void )
 #endif
 			
 			{
-				try 
-				{
+				/*try 
+				{*/
 					// compute a frame
 					update();
-				}
-				catch (INIException e)
-				{
-					// Release CRASH doesn't return, so don't worry about executing additional code.
-					if (e.mFailureMessage)
-						RELEASE_CRASH((e.mFailureMessage));
-					else
-						RELEASE_CRASH(("Uncaught Exception in GameEngine::update"));
-				}
-				catch (...)
-				{
-					// try to save info off
-					try 
-					{
-						if (TheRecorder && TheRecorder->getMode() == RECORDERMODETYPE_RECORD && TheRecorder->isMultiplayer())
-							TheRecorder->cleanUpReplayFile();
-					}
-					catch (...)
-					{
-					}
-					RELEASE_CRASH(("Uncaught Exception in GameEngine::update"));
-				}	// catch
+				//}
+				//catch (INIException e)
+				//{
+				//	// Release CRASH doesn't return, so don't worry about executing additional code.
+				//	if (e.mFailureMessage)
+				//		RELEASE_CRASH((e.mFailureMessage));
+				//	else
+				//		RELEASE_CRASH(("Uncaught Exception in GameEngine::update"));
+				//}
+				//catch (...)
+				//{
+				//	// try to save info off
+				//	try 
+				//	{
+				//		if (TheRecorder && TheRecorder->getMode() == RECORDERMODETYPE_RECORD && TheRecorder->isMultiplayer())
+				//			TheRecorder->cleanUpReplayFile();
+				//	}
+				//	catch (...)
+				//	{
+				//	}
+				//	RELEASE_CRASH(("Uncaught Exception in GameEngine::update, Has another Errors"));
+				//}	// catch
 			}	// perf
 
 			{

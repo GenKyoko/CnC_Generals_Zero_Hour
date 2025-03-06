@@ -111,6 +111,12 @@ BEGIN_MESSAGE_MAP(CWB3dFrameWnd, CMainFrame)
 	ON_UPDATE_COMMAND_UI(ID_WINDOW_PREVIEW640X480, OnUpdateWindowPreview640x480)
 	ON_COMMAND(ID_WINDOW_PREVIEW800X600, OnWindowPreview800x600)
 	ON_UPDATE_COMMAND_UI(ID_WINDOW_PREVIEW800X600, OnUpdateWindowPreview800x600)
+	ON_COMMAND(ID_WINDOW_PREVIEW1280x720, OnWindowPreview1280x720)
+	ON_UPDATE_COMMAND_UI(ID_WINDOW_PREVIEW1280x720, OnUpdateWindowPreview1280x720)
+	ON_COMMAND(ID_WINDOW_PREVIEW1440X900, OnWindowPreview1440x900)
+	ON_UPDATE_COMMAND_UI(ID_WINDOW_PREVIEW1440X900, OnUpdateWindowPreview1440x900)
+	ON_COMMAND(ID_WINDOW_PREVIEW1920X1080, OnWindowPreview1920x1080)
+	ON_UPDATE_COMMAND_UI(ID_WINDOW_PREVIEW1920X1080, OnUpdateWindowPreview1920x1080)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -175,4 +181,43 @@ void CWB3dFrameWnd::OnWindowPreview800x600()
 void CWB3dFrameWnd::OnUpdateWindowPreview800x600(CCmdUI* pCmdUI) 
 {
 	pCmdUI->SetCheck(m_3dViewWidth==800?1:0);
+}
+
+void CWB3dFrameWnd::OnWindowPreview1280x720()
+{
+	if (m_3dViewWidth == 1280) return;
+	::AfxGetApp()->WriteProfileInt(MAIN_FRAME_SECTION, "Width", 1280);
+	::AfxGetApp()->WriteProfileInt(MAIN_FRAME_SECTION, "Height", 720);
+	adjustWindowSize();
+}
+
+void CWB3dFrameWnd::OnUpdateWindowPreview1280x720(CCmdUI* pCmdUI)
+{
+	pCmdUI->SetCheck(m_3dViewWidth == 1280 ? 1 : 0);
+}
+
+void CWB3dFrameWnd::OnWindowPreview1440x900()
+{
+	if (m_3dViewWidth == 1440) return;
+	::AfxGetApp()->WriteProfileInt(MAIN_FRAME_SECTION, "Width", 1440);
+	::AfxGetApp()->WriteProfileInt(MAIN_FRAME_SECTION, "Height", 900);
+	adjustWindowSize();
+}
+
+void CWB3dFrameWnd::OnUpdateWindowPreview1440x900(CCmdUI* pCmdUI)
+{
+	pCmdUI->SetCheck(m_3dViewWidth == 1440 ? 1 : 0);
+}
+
+void CWB3dFrameWnd::OnWindowPreview1920x1080()
+{
+	if (m_3dViewWidth == 1920) return;
+	::AfxGetApp()->WriteProfileInt(MAIN_FRAME_SECTION, "Width", 1920);
+	::AfxGetApp()->WriteProfileInt(MAIN_FRAME_SECTION, "Height", 1080);
+	adjustWindowSize();
+}
+
+void CWB3dFrameWnd::OnUpdateWindowPreview1920x1080(CCmdUI* pCmdUI)
+{
+	pCmdUI->SetCheck(m_3dViewWidth == 1920 ? 1 : 0);
 }

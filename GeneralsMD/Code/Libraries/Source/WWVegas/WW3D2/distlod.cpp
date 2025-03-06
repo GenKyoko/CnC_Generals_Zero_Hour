@@ -76,6 +76,7 @@
  *   DistLODClass::Decrement_Lod -- moves to a lower detail LOD                                *
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
+#include <stdint.h>
 
 #include "distlod.h"
 #include "nstrdup.h"
@@ -119,7 +120,7 @@ RenderObjClass * DistLODPrototypeClass::Create(void)
 	HLodClass * hlod = NEW_REF(HLodClass , (name,robj,count));
 
 	// Now, release the temporary refs and memory for the name
-	for (i=0; i<count; i++) {
+	for (int32_t i=0; i<count; i++) {
 		robj[i]->Release_Ref();
 	}
 	free(name);

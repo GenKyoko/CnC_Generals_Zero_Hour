@@ -28,7 +28,7 @@
 #include "streakrender.h"
 #include "ww3d.h"
 #include "rinfo.h"
-#include "dx8wrapper.h"
+#include "GameRenderer.h"
 #include "sortingrenderer.h"
 #include "vp.h"
 #include "vector3i.h"
@@ -1355,7 +1355,7 @@ void StreakRendererClass::RenderStreak
 				vertex->X = vertexArray[i].x;
 				vertex->Y = vertexArray[i].y;
 				vertex->Z = vertexArray[i].z;
-				*reinterpret_cast<unsigned int *>(vb + diffuseOffset) = DX8Wrapper::Convert_Color_Clamp(colors[MIN((i/2), point_cnt)]); // TODO: Does not work correctly when subdivision are not 0
+				//*reinterpret_cast<unsigned int *>(vb + diffuseOffset) = DX8Wrapper::Convert_Color_Clamp(colors[MIN((i/2), point_cnt)]); // TODO: Does not work correctly when subdivision are not 0
 				Vector2 *texture = reinterpret_cast<Vector2 *>(vb + textureOffset);
 				texture->U = vertexArray[i].u1;
 				texture->V = vertexArray[i].v1;

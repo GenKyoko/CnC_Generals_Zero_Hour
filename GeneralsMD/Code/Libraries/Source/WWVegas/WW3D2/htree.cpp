@@ -50,6 +50,7 @@
  *   HTreeClass::Get_Parent_Index -- returns index of the parent of the given bone             *
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
+#include <stdint.h>
 
 #include "htree.h"
 #include "hanim.h"
@@ -886,7 +887,7 @@ void HTreeClass::Combo_Update
 
 			pivot->IsVisible = false;
 
-			for ( anim_num = 0; (anim_num < anim->Get_Num_Anims()) && (!pivot->IsVisible); anim_num++ ) {
+			for (int32_t anim_num = 0; (anim_num < anim->Get_Num_Anims()) && (!pivot->IsVisible); anim_num++ ) {
 				HAnimClass *motion = anim->Get_Motion( anim_num );
 				if ( motion != NULL ) {
 					float frame_num = anim->Get_Frame( anim_num );

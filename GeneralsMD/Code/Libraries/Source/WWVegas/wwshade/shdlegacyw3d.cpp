@@ -37,8 +37,7 @@
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 #include <d3dx8math.h>
-#include "dx8fvf.h"
-#include "dx8wrapper.h"
+#include "GameRenderer.h"
 #include "assetmgr.h"
 
 #include "shdlegacyw3d.h"

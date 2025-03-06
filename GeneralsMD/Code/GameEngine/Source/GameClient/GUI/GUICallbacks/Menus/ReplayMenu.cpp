@@ -32,7 +32,7 @@
 
 
 #include "Lib/BaseType.h"
-#include "Common/FileSystem.h"
+#include "Common/FileSystemEA.h"
 #include "Common/GameEngine.h"
 #include "Common/GameState.h"
 #include "Common/Recorder.h"
@@ -394,7 +394,7 @@ WindowMsgHandledType ReplayMenuInput( GameWindow *window, UnsignedInt msg,
 					// send a simulated selected event to the parent window of the
 					// back/exit button
 					//
-					if( BitTest( state, KEY_STATE_UP ) )
+					if( BitTestEA( state, KEY_STATE_UP ) )
 					{
 
 						TheWindowManager->winSendSystemMsg( window, GBM_SELECTED, 

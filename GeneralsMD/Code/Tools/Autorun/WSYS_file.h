@@ -161,7 +161,7 @@ inline void File::deleteOnClose( void ) { m_deleteOnClose = TRUE;};
 
 
 // include FileSystem.h as it will be used alot with File.h
-//#include "wsys/FileSystem.h"
+//#include "wsys/FileSystemEA.h"
 
 
 #endif // __WSYS_FILE_H

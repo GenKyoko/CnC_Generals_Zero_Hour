@@ -70,7 +70,7 @@ enum DrawableID;
 
 #include <algorithm>
 #include <bitset>
-#include <hash_map>
+#include <unordered_map>
 #include <list>
 #include <map>
 #include <queue>
@@ -190,18 +190,26 @@ namespace rts
 
 	template<> struct hash<AsciiString>
 	{
-		size_t operator()(AsciiString ast) const
+		size_t operator()(const AsciiString& ast) const
 		{ 
-			std::hash<const char *> tmp;
-			return tmp((const char *) ast.str());
+			size_t hash = 5381;
+			const char* s = ast.str();
+			size_t len = std::strlen(ast.str());
+			for (size_t i = 0; i < len; i++)
+			{
+				hash = ((hash << 5) + hash) + static_cast<unsigned char>(s[i]); // hash * 33 + s[i]
+			}
+			return hash;
 		}
 	};
 
+	// Fix the equal_to specialization for AsciiString.
+	// This version compares the actual character data rather than pointer values.
 	template<> struct equal_to<AsciiString>
 	{
-		Bool operator()(const AsciiString& __t1, const AsciiString& __t2) const
+		Bool operator()(const AsciiString& lhs, const AsciiString& rhs) const
 		{
-			return (__t1 == __t2);
+			return std::strcmp(lhs.str(), rhs.str()) == 0;
 		}
 	};
 

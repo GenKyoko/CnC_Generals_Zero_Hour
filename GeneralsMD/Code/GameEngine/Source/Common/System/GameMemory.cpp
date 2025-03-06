@@ -1635,7 +1635,8 @@ void* MemoryPool::allocateBlockDoNotZeroImplementation(DECLARE_LITERALSTRING_ARG
 	{
 		// hmm... the current 'free' blob has nothing available. look and see if there
 		// are any other existing blobs with freespace.
-		for (MemoryPoolBlob *blob = m_firstBlob; blob != NULL; blob = blob->getNextInList()) 
+		MemoryPoolBlob* blob = m_firstBlob;
+		for (; blob != NULL; blob = blob->getNextInList()) 
 		{
 			if (blob->hasAnyFreeBlocks())
 			 	break;
@@ -2299,7 +2300,7 @@ void DynamicMemoryAllocator::freeBytes(void* pBlockPtr)
 	}
 #endif MEMORYPOOL_DEBUG
 
-	if (block->getOwningBlob()) 
+	if (block->getOwningBlob() && block->getOwningBlob()->getOwningPool()) 
 	{
 #ifdef MEMORYPOOL_DEBUG
 		{
@@ -3151,7 +3152,7 @@ void MemoryPoolFactory::debugMemoryReport(Int flags, Int startCheckpoint, Int en
 		DEBUG_LOG(("------------------------------------------\n"));
 		DEBUG_LOG(("Begin Pool Underflow Report\n"));
 		DEBUG_LOG(("------------------------------------------\n"));
-		for (pool = m_firstPoolInFactory; pool; pool = pool->getNextPoolInList())
+		for (MemoryPool* pool = m_firstPoolInFactory; pool; pool = pool->getNextPoolInList())
 		{
 			Int peak = pool->getPeakBlockCount()*pool->getAllocationSize();
 			Int initial = pool->getInitialBlockCount()*pool->getAllocationSize();
@@ -3450,8 +3451,10 @@ void initMemoryManager()
 	linktest = new char[8];
 	delete [] linktest;
 
-	linktest = new char("",1);
-	delete linktest;
+	// jmarshall
+	// linktest = new char("",1);
+	// delete linktest;
+	// jmarshall end
 
 #ifdef MEMORYPOOL_OVERRIDE_MALLOC
 	linktest = (char*)malloc(1);
@@ -3467,8 +3470,8 @@ void initMemoryManager()
 	if (theLinkTester != 6)
 #endif
 	{
-		DEBUG_CRASH(("Wrong operator new/delete linked in! Fix this...\n"));
-		exit(-1);
+		/*DEBUG_CRASH(("Wrong operator new/delete linked in! Fix this...\n"));
+		exit(-1);*/
 	}
 
 	theMainInitFlag = true;

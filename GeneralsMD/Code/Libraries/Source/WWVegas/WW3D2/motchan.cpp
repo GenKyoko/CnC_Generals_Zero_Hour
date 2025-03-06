@@ -43,6 +43,7 @@
  *   BitChannelClass::Load -- Read a bit channel from a w3d chunk                              *
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
+#include <stdint.h>
 
 #include "motchan.h"
 #include "w3d_file.h"
@@ -1303,7 +1304,7 @@ return;
 		inv_scale=1.0f/ValueScale;
 	}
 	inv_scale*=65535.0f;
-	for (i=0;i<count;++i) {
+	for (int32_t i=0;i<count;++i) {
 		float value=Data[i];
 		value-=ValueOffset;
 		value*=inv_scale;

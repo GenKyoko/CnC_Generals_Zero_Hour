@@ -58,12 +58,9 @@
 #include "meshmdl.h"
 #include "plane.h"
 #include "statistics.h"
-#include "dx8vertexbuffer.h"
-#include "dx8indexbuffer.h"
+#include "GameRenderer.h"
 #include "simplevec.h"
 #include "texture.h"
-#include "dx8wrapper.h"
-#include "dx8caps.h"
 
 #define DISABLE_CLIPPING	0
 

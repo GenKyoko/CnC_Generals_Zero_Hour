@@ -53,11 +53,11 @@
 //
 //-----------------------------------------------------------------------------
 
-#include "dx8wrapper.h"
+#include "GameRenderer.h"
 #include "assetmgr.h"
 #include "Lib/BaseType.h"
 #include "Common/File.h"
-#include "Common/FileSystem.h"
+#include "Common/FileSystemEA.h"
 #include "W3DDevice/GameClient/W3DShaderManager.h"
 #include "W3DDevice/GameClient/W3DShroud.h"
 #include "W3DDevice/GameClient/HeightMap.h"
@@ -71,9 +71,7 @@
 #include "common/GlobalData.h"
 #include "common/GameLOD.h"
 #include "d3dx8tex.h"
-#include "dx8caps.h"
 #include "common/gamelod.h"
-#include "Benchmark.h"
 
 #ifdef _INTERNAL
 // for occasional debugging...
@@ -3113,7 +3111,7 @@ Bool W3DShaderManager::testMinimumRequirements(ChipsetType *videoChipType, CpuTy
 
 	if (intBenchIndex && floatBenchIndex && memBenchIndex)
 	{
-		RunBenchmark(0, NULL, floatBenchIndex, intBenchIndex, memBenchIndex);
+		// RunBenchmark(0, NULL, floatBenchIndex, intBenchIndex, memBenchIndex);
 	}
 
 	return TRUE;

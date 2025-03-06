@@ -38,6 +38,7 @@
 #include <eh.h>
 #include <ole2.h>
 #include <dbt.h>
+#include <shellscalingapi.h>
 
 // USER INCLUDES //////////////////////////////////////////////////////////////
 #include "WinMain.h"
@@ -49,7 +50,7 @@
 #include "Common/GameSounds.h"
 #include "Common/Debug.h"
 #include "Common/GameMemory.h"
-#include "Common/SafeDisc/CdaPfn.h"
+//#include "Common/SafeDisc/CdaPfn.h"
 #include "Common/StackDump.h"
 #include "Common/MessageStream.h"
 #include "Common/Registry.h"
@@ -62,8 +63,8 @@
 #include "Win32Device/GameClient/Win32Mouse.h"
 #include "Win32Device/Common/Win32GameEngine.h"
 #include "Common/Version.h"
-#include "BuildVersion.h"
-#include "GeneratedVersion.h"
+//#include "BuildVersion.h"
+//#include "GeneratedVersion.h"
 #include "Resource.h"
 
 #include <rts/profile.h>
@@ -77,7 +78,7 @@
 // GLOBALS ////////////////////////////////////////////////////////////////////
 HINSTANCE ApplicationHInstance = NULL;  ///< our application instance
 HWND ApplicationHWnd = NULL;  ///< our application window handle
-Bool ApplicationIsWindowed = false;
+Bool ApplicationIsWindowed = true;
 Win32Mouse *TheWin32Mouse= NULL;  ///< for the WndProc() only
 DWORD TheMessageTime = 0;	///< For getting the time that a message was posted from Windows.
 
@@ -696,7 +697,7 @@ static Bool initializeAppWindows( HINSTANCE hInstance, Int nCmdShow, Bool runWin
    // Create our main window
 	windowStyle =  WS_POPUP|WS_VISIBLE;
 	if (runWindowed) 
-		windowStyle |= WS_DLGFRAME | WS_CAPTION | WS_SYSMENU;
+		windowStyle = WS_OVERLAPPEDWINDOW | WS_VISIBLE;
 	else
 		windowStyle |= WS_EX_TOPMOST | WS_SYSMENU;
 
@@ -757,24 +758,15 @@ static Bool initializeAppWindows( HINSTANCE hInstance, Int nCmdShow, Bool runWin
 }  // end initializeAppWindows
 
 void munkeeFunc(void);
-CDAPFN_DECLARE_GLOBAL(munkeeFunc, CDAPFN_OVERHEAD_L5, CDAPFN_CONSTRAINT_NONE);
+//CDAPFN_DECLARE_GLOBAL(munkeeFunc, CDAPFN_OVERHEAD_L5, CDAPFN_CONSTRAINT_NONE);
 void munkeeFunc(void)
 {
-	CDAPFN_ENDMARK(munkeeFunc);
+	//CDAPFN_ENDMARK(munkeeFunc);
 }
 
 void checkProtection(void)
 {
-#ifdef _INTERNAL
-	__try
-	{
-		munkeeFunc();
-	}
-	__except(EXCEPTION_EXECUTE_HANDLER)
-	{
-		exit(0); // someone is messing with us.
-	}
-#endif
+
 }
 
 // strtrim ====================================================================
@@ -871,17 +863,14 @@ static CriticalSection critSec1, critSec2, critSec3, critSec4, critSec5;
 // WinMain ====================================================================
 /** Application entry point */
 //=============================================================================
-Int APIENTRY WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
-                      LPSTR lpCmdLine, Int nCmdShow )
+int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, Int nCmdShow)
 {
-	checkProtection();
 
 #ifdef _PROFILE
   Profile::StartRange("init");
 #endif
-
-	try {
-
+		{
+	  SetProcessDpiAwareness(PROCESS_PER_MONITOR_DPI_AWARE);
 		_set_se_translator( DumpExceptionInfo ); // Hook that allows stack trace.
 		//
 		// there is something about checkin in and out the .dsp and .dsw files 
@@ -1005,21 +994,9 @@ Int APIENTRY WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
  
 		// Set up version info
 		TheVersion = NEW Version;
-		TheVersion->setVersion(VERSION_MAJOR, VERSION_MINOR, VERSION_BUILDNUM, VERSION_LOCALBUILDNUM,
+		/*TheVersion->setVersion(VERSION_MAJOR, VERSION_MINOR, VERSION_BUILDNUM, VERSION_LOCALBUILDNUM,
 			AsciiString(VERSION_BUILDUSER), AsciiString(VERSION_BUILDLOC),
-			AsciiString(__TIME__), AsciiString(__DATE__));
-
-#ifdef DO_COPY_PROTECTION
-		if (!CopyProtect::isLauncherRunning())
-		{
-			DEBUG_LOG(("Launcher is not running - about to bail\n"));
-			delete TheVersion;
-			TheVersion = NULL;
-			shutdownMemoryManager();
-			DEBUG_SHUTDOWN();
-			return 0;
-		}
-#endif
+			AsciiString(__TIME__), AsciiString(__DATE__));*/
 
 
 		//Create a mutex with a unique name to Generals in order to determine if
@@ -1087,10 +1064,6 @@ Int APIENTRY WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
 		// BGC - shut down COM
 	//	OleUninitialize();
-	}	
-	catch (...) 
-	{ 
-	
 	}
 
 	TheUnicodeStringCriticalSection = NULL;

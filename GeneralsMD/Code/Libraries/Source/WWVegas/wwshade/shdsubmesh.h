@@ -42,7 +42,7 @@
 #include "always.h"
 #include "meshgeometry.h"
 #include "shdinterface.h"
-#include "dx8wrapper.h"
+#include "GameRenderer.h"
 #include "sharebuf.h"
 
 class DecalGeneratorClass;

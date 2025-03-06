@@ -291,7 +291,7 @@ WindowMsgHandledType PopupLadderSelectInput( GameWindow *window, UnsignedInt msg
 					// send a simulated selected event to the parent window of the
 					// back/exit button
 					//
-					if( BitTest( state, KEY_STATE_UP ) )
+					if( BitTestEA( state, KEY_STATE_UP ) )
 					{
 						switch (s_currentMode)
 						{
@@ -576,7 +576,7 @@ static void updateLadderDetails( Int selID, GameWindow *staticTextLadderName, Ga
 
 	// maps
 	AsciiStringList validMaps = info->validMaps;
-	for (it = validMaps.begin(); it != validMaps.end(); ++it)
+	for (AsciiStringListIterator it = validMaps.begin(); it != validMaps.end(); ++it)
 	{
 		const MapMetaData *md = TheMapCache->findMap(*it);
 		if (md)

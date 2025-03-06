@@ -44,7 +44,7 @@
 #include "Common/AudioRandomValue.h"
 #include "Common/AudioSettings.h"
 #include "Common/File.h"
-#include "Common/FileSystem.h"
+#include "Common/FileSystemEA.h"
 #include "Common/GameSounds.h"
 #include "Common/GlobalData.h"
 #include "Common/Player.h"
@@ -340,7 +340,7 @@ void AudioEventRTS::generateFilename( void )
 
 
 		
-		if (BitTest(m_eventInfo->m_control, AC_RANDOM)) 
+		if (BitTestEA(m_eventInfo->m_control, AC_RANDOM)) 
 		{ 
 			if (m_isLogicalAudio) 
 			{
@@ -474,7 +474,7 @@ void AudioEventRTS::advanceNextPlayPortion( void )
 			m_portionToPlayNext = PP_Sound;
 			break;
 		case PP_Sound:
-			if (m_eventInfo && BitTest(m_eventInfo->m_control, AC_ALL)) 
+			if (m_eventInfo && BitTestEA(m_eventInfo->m_control, AC_ALL)) 
 			{
 				if (m_allCount == m_eventInfo->m_sounds.size()) {
 					m_portionToPlayNext = PP_Decay;
@@ -671,7 +671,7 @@ Bool AudioEventRTS::isPositionalAudio( void ) const
 {
 	if( m_eventInfo ) 
 	{
-		if( !BitTest( m_eventInfo->m_type, ST_WORLD ) ) 
+		if( !BitTestEA( m_eventInfo->m_type, ST_WORLD ) ) 
 		{
 			return FALSE;
 		}

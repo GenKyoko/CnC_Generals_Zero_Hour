@@ -51,7 +51,7 @@
 #include "Resource.h"
 
 #include "Common/ThingFactory.h"
-#include "Common/FileSystem.h"
+#include "Common/FileSystemEA.h"
 #include "Win32Device/Common/Win32LocalFileSystem.h"
 #include "Win32Device/Common/Win32BIGFileSystem.h"
 #include "Common/SubSystemInterface.h"
@@ -59,7 +59,7 @@
 #include "W3DDevice/Common/W3DModuleFactory.h"
 
 
-#include "Common/FileSystem.h"
+#include "Common/FileSystemEA.h"
 #include "Common/ArchiveFileSystem.h"
 #include "Common/LocalFileSystem.h"
 #include "Common/Debug.h"
@@ -97,7 +97,7 @@
 
 #include "W3DDevice/Common/W3DModuleFactory.h"
 #include "W3DDevice/GameClient/W3DParticleSys.h"
-#include "MilesAudioDevice/MilesAudioManager.h"
+#include "OpenALAudioDevice/OpenALAudioManager.h"
 
 #include <io.h>
 #include "win32device/GameClient/Win32Mouse.h"
@@ -304,7 +304,7 @@ Int APIENTRY WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	initSubsystem(TheTerrainTypes, new TerrainTypeCollection(), "Data\\INI\\Default\\Terrain.ini", "Data\\INI\\Terrain.ini");
 	initSubsystem(TheTerrainRoads, new TerrainRoadCollection(), "Data\\INI\\Default\\Roads.ini", "Data\\INI\\Roads.ini");
 	initSubsystem(TheScriptEngine, (ScriptEngine*)(new ScriptEngine()));
-	initSubsystem(TheAudio, (AudioManager*)new MilesAudioManager());
+	initSubsystem(TheAudio, (AudioManager*)new OpenALAudioManager());
 	initSubsystem(TheVideoPlayer, (VideoPlayerInterface*)(new VideoPlayer()));
 	initSubsystem(TheModuleFactory, (ModuleFactory*)(new W3DModuleFactory()));
 	initSubsystem(TheSidesList, new SidesList());

@@ -26,7 +26,7 @@
 #include "PreRTS.h"	// This must go first in EVERY cpp file int the GameEngine
 
 #include "GameClient/LanguageFilter.h"
-#include "Common/FileSystem.h"
+#include "Common/FileSystemEA.h"
 #include "Common/File.h"
 
 #ifdef _INTERNAL
@@ -160,6 +160,40 @@ void LanguageFilter::unHaxor(UnicodeString &word) {
 
 // returning true means that there are more words in the file.
 Bool LanguageFilter::readWord(File *file1, UnsignedShort *buf) {
+	Int index = 0;
+	Bool retval = TRUE;
+	Int val = 0;
+
+	UnsignedShort c;
+
+	val = file1->read(&c, sizeof(UnsignedShort));
+	if ((val == -1) || (val == 0)) {
+		buf[index] = 0;
+		return FALSE;
+	}
+	buf[index] = c;
+
+	while (buf[index] != L' ') {
+		++index;
+		val = file1->read(&c, sizeof(UnsignedShort));
+		if ((val == -1) || (val == 0)) {
+			c = WEOF;
+		}
+
+		if ((c == WEOF) || (c == L' ')) {
+			buf[index] = 0;
+			if (c == WEOF) {
+				retval = FALSE;
+			}
+			break;
+		}
+		buf[index] = c;
+	}
+	return retval;
+}
+
+// returning true means that there are more words in the file.
+Bool LanguageFilter::readWord(File* file1, wchar_t* buf) {
 	Int index = 0;
 	Bool retval = TRUE;
 	Int val = 0;

@@ -22,7 +22,7 @@
 // $Revision: #1 $
 // $DateTime: 2003/07/03 11:55:26 $
 //
-// ©2003 Electronic Arts
+// Â©2003 Electronic Arts
 //
 // Unhandled exception handler
 //////////////////////////////////////////////////////////////////////////////
@@ -158,7 +158,7 @@ void DebugExceptionhandler::LogFPURegisters(Debug &dbg, struct _EXCEPTION_POINTE
       << " ErrSel:  "    << Debug::Width(8) << flt.ErrorSelector << "\n"
       << "DataOfs:     " << Debug::Width(8) << flt.DataOffset
       << " DataSel: "    << Debug::Width(8) << flt.DataSelector << "\n"
-      << "Cr0NpxState: " << Debug::Width(8) << flt.Cr0NpxState << "\n";
+      << "Spare0: " << Debug::Width(8) << flt.Spare0 << "\n";
 
   for (unsigned k=0;k<SIZE_OF_80387_REGISTERS/10;++k)
   {

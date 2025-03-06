@@ -42,7 +42,7 @@
 
 #include "always.h"
 #include "refcount.h"
-#include "dx8wrapper.h"
+#include "GameRenderer.h"
 
 class ShdDefClass;
 class ShdMeshClass;

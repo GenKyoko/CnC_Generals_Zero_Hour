@@ -1,24 +1,6 @@
-/*
-**	Command & Conquer Generals Zero Hour(tm)
-**	Copyright 2025 Electronic Arts Inc.
-**
-**	This program is free software: you can redistribute it and/or modify
-**	it under the terms of the GNU General Public License as published by
-**	the Free Software Foundation, either version 3 of the License, or
-**	(at your option) any later version.
-**
-**	This program is distributed in the hope that it will be useful,
-**	but WITHOUT ANY WARRANTY; without even the implied warranty of
-**	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-**	GNU General Public License for more details.
-**
-**	You should have received a copy of the GNU General Public License
-**	along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
-
 //{{NO_DEPENDENCIES}}
-// Microsoft Developer Studio generated include file.
-// Used by WorldBuilder.rc
+// Microsoft Visual C++ 生成的包含文件。
+// 供 WorldBuilder.rc 使用
 //
 #define IDPREVIEWSOUND                  3
 #define IDC_PREVIEWSOUND                3
@@ -718,6 +700,12 @@
 #define ID_SELECTLAYEROBJECT            33344
 #define ID_SELECTACTIVELAYER            33345
 #define ID_VIEW_SHOW_SOUND_CIRCLES      33346
+#define ID_WINDOW_ID                    33347
+#define ID_WINDOW_PREVIEW1280x720       33348
+#define ID_WINDOW_1440X900              33349
+#define ID_WINDOW_PREVIEW1440X900       33350
+#define ID_WINDOW_1920X1080             33351
+#define ID_WINDOW_PREVIEW1920X1080      33352
 #define IDS_NEW                         61446
 #define IDS_RESIZE                      61447
 #define IDS_REMOVING_INUSE_TEAM         61448
@@ -766,7 +754,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        242
-#define _APS_NEXT_COMMAND_VALUE         33347
+#define _APS_NEXT_COMMAND_VALUE         33353
 #define _APS_NEXT_CONTROL_VALUE         1354
 #define _APS_NEXT_SYMED_VALUE           101
 #endif

@@ -32,7 +32,7 @@
 
 #include "Common/ThingFactory.h"
 #include "Common/ThingTemplate.h"
-#include "Common/FileSystem.h"
+#include "Common/FileSystemEA.h"
 #include "Common/GameAudio.h"
 #include "Common/MapObject.h"
 #include "Common/ModuleFactory.h"
@@ -111,7 +111,7 @@ ThingFactory::ThingFactory()
 	m_firstTemplate = NULL;
 	m_nextTemplateID = 1;	// not zero!
 
-	m_templateHashMap.resize( TEMPLATE_HASH_SIZE );
+	m_templateHashMap.rehash( TEMPLATE_HASH_SIZE ); // jmarshall
 }  // end ThingFactory
 
 //-------------------------------------------------------------------------------------------------

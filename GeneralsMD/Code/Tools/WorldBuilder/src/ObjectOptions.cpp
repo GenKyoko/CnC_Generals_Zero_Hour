@@ -35,7 +35,7 @@
 #include "Common/ThingFactory.h"
 #include "Common/ThingSort.h"
 #include "Common/PlayerTemplate.h"
-#include "Common/FileSystem.h" // for LOAD_TEST_ASSETS
+#include "Common/FileSystemEA.h" // for LOAD_TEST_ASSETS
 #include "GameLogic/SidesList.h"
 #include "GameClient/Color.h"
 
@@ -431,7 +431,7 @@ HTREEITEM ObjectOptions::_FindOrDont(const char* pLabel, HTREEITEM startPoint)
 			item.cchTextMax = sizeof(buffer)-2;				
 			m_objectTreeView.GetItem(&item);
 
-			char* strToTest = strrchr(pLabel, '/');
+			const char* strToTest = strrchr(pLabel, '/');
 //		if (strstr((strToTest ? strToTest : pLabel), buffer)) 
 			if (strcmp((strToTest ? strToTest : pLabel), buffer) == 0) 
 			{

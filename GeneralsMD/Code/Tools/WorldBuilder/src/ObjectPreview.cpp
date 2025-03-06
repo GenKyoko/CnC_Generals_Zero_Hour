@@ -41,12 +41,12 @@
 #include "Common/ThingFactory.h"
 #include "Common/ThingSort.h"
 #include "Common/PlayerTemplate.h"
-#include "Common/FileSystem.h"
+#include "Common/FileSystemEA.h"
 #include "GameLogic/SidesList.h"
 #include "GameClient/Color.h"
 
 #include "W3DDevice/GameClient/W3DAssetManager.h"
-#include "WW3D2/DX8Wrapper.h"
+#include "GameRenderer.h"
 #include "WWLib/targa.h"
 
 /////////////////////////////////////////////////////////////////////////////

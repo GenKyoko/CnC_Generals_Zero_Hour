@@ -40,7 +40,7 @@
 
 #include <stdio.h>
 #include "shdhwshader.h"
-#include "dx8wrapper.h"
+#include "GameRenderer.h"
 #include "rinfo.h"
 #include "shdhw_constants.h"
 

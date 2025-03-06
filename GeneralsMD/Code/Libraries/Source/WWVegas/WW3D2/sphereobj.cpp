@@ -67,6 +67,7 @@
  *   SphereRenderObjClass::Scale -- scales sphere non-uniformly.                               *
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
+#include <stdint.h>
 
 #include "sphereobj.h"
 #include "w3d_util.h"
@@ -85,9 +86,7 @@
 #include "wwstring.h"
 #include "camera.h"
 #include "statistics.h"
-#include "dx8wrapper.h"
-#include "dx8vertexbuffer.h"
-#include "dx8indexbuffer.h"
+#include "GameRenderer.h"
 #include "sortingrenderer.h"
 #include "visrasterizer.h"
 
@@ -1598,7 +1597,7 @@ void SphereMeshClass::Generate(float radius, int slices, int stacks)
 
 	// Do Fan #2
 	int vtx_idx = Vertex_ct - 1;
-	for (ct = fan_size; ct < (fan_size * 2); ct++) {
+	for (int32_t ct = fan_size; ct < (fan_size * 2); ct++) {
 		fans[ct] = vtx_idx;
 		vtx_idx--;
 	}
@@ -1616,7 +1615,7 @@ void SphereMeshClass::Generate(float radius, int slices, int stacks)
 			int base_vtx  = 1 + (stacks * (Slices+1));
 			int cur_vtx = base_vtx;
 
-			for(ct = 0; ct <= Slices; ct++) {
+			for(int32_t ct = 0; ct <= Slices; ct++) {
 
 				strips[store_idx]   = cur_vtx + (Slices+1);
 				strips[store_idx+1] = cur_vtx;

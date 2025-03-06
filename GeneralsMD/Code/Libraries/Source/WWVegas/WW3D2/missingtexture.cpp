@@ -19,7 +19,7 @@
 // 08/05/02 KM Texture class redesign
 #include "missingtexture.h"
 #include "texture.h"
-#include "dx8wrapper.h"
+#include "GameRenderer.h"
 #include <D3dx8core.h>
 
 static unsigned missing_image_width=128;

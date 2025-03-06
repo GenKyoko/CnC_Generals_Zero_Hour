@@ -30,7 +30,7 @@
 
 #include "Common/CRCDebug.h"
 #include "Common/File.h"
-#include "Common/FileSystem.h"
+#include "Common/FileSystemEA.h"
 #include "Common/GameState.h"
 #include "GameClient/GameText.h"
 #include "GameClient/MapUtil.h"
@@ -782,7 +782,7 @@ void GameInfo::adjustSlotsForMap()
 		// now go through and close the appropriate number of slots.
 		// note that no players are kicked in this process, we leave
 		// that up to the user.
-		for (i = 0; i < MAX_SLOTS; ++i)
+		for (Int i = 0; i < MAX_SLOTS; ++i)
 		{
 			// we have room for more players, if this slot is unoccupied, set it to open.
 			GameSlot *slot = getSlot(i);

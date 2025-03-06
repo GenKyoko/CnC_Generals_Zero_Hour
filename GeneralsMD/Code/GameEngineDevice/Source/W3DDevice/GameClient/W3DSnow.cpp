@@ -21,7 +21,7 @@
 #include "W3DDevice/GameClient/W3DSnow.h"
 #include "W3DDevice/GameClient/heightmap.h"
 #include "GameClient/View.h"
-#include "WW3D2/dx8wrapper.h"
+#include "GameRenderer.h"
 #include "WW3D2/rinfo.h"
 #include "WW3D2/camera.h"
 #include "WW3D2/assetmgr.h"

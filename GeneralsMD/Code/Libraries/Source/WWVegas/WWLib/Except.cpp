@@ -168,20 +168,20 @@ static char const *ImagehelpFunctionNames[] =
  * HISTORY:                                                                                    *
  *   8/22/00 11:42AM ST : Created                                                              *
  *=============================================================================================*/
-int __cdecl _purecall(void)
-{
-	int return_code = 0;
+// int __cdecl _purecall(void)
+// {
+// 	int return_code = 0;
 
-#ifdef WWDEBUG
-	/*
-	** Use int3 to cause an exception.
-	*/
-	WWDEBUG_SAY(("Pure Virtual Function call. Oh No!\n"));
-	_asm int 0x03;
-#endif	//_DEBUG_ASSERT
+// #ifdef WWDEBUG
+// 	/*
+// 	** Use int3 to cause an exception.
+// 	*/
+// 	WWDEBUG_SAY(("Pure Virtual Function call. Oh No!\n"));
+// 	_asm int 0x03;
+// #endif	//_DEBUG_ASSERT
 
-	return(return_code);
-}
+// 	return(return_code);
+// }
 
 
 
@@ -434,7 +434,8 @@ void Dump_Exception_Info(EXCEPTION_POINTERS *e_info)
 	/*
 	** Match the exception type with the error string and print it out
 	*/
-	for (int i=0 ; _codes[i] != 0xffffffff ; i++) {
+	int i = 0;
+	for (; _codes[i] != 0xffffffff ; i++) {
 		if (_codes[i] == e_info->ExceptionRecord->ExceptionCode) {
 			DebugString("Exception Handler: Found exception description\n");
 			break;
@@ -611,7 +612,7 @@ void Dump_Exception_Info(EXCEPTION_POINTERS *e_info)
 	Add_Txt(scrap);
 	sprintf(scrap, "    Data Selector: %08x\r\n", context->FloatSave.DataSelector);
 	Add_Txt(scrap);
-	sprintf(scrap, "      Cr0NpxState: %08x\r\n", context->FloatSave.Cr0NpxState);
+	sprintf(scrap, "      Spare0: %08x\r\n", context->FloatSave.Spare0);
 	Add_Txt(scrap);
 
 	for (int fp=0 ; fp<SIZE_OF_80387_REGISTERS / 10 ; fp++) {

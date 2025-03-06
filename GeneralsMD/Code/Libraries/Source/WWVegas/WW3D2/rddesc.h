@@ -44,8 +44,13 @@
 
 #include "vector.h"
 #include "wwstring.h"
+#ifndef EDITOR
 #include <d3d8types.h>
 #include <d3d8caps.h>
+#else
+#include <../../../Libraries/DX90SDK/Include/d3d8caps.h>
+#include <../../../Libraries/DX90SDK/Include/d3d8types.h>
+#endif
 
 class ResolutionDescClass
 {

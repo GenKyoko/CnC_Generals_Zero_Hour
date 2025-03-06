@@ -43,10 +43,9 @@
 #include "htree.h"
 #include "vp.h"
 #include "visrasterizer.h"
-#include "dx8polygonrenderer.h"
+#include "GameRenderer.h"
 #include "bwrender.h"
 #include "camera.h"
-#include "dx8renderer.h"
 #include "hashtemplate.h"
 
 
@@ -676,7 +675,7 @@ void MeshModelClass::Init_For_NPatch_Rendering()
 		}
 	}
 
-	for (i=0;i<polygon_count;++i) {
+	for (unsigned i=0;i<polygon_count;++i) {
 		bool duplicates[3];
 		duplicates[0]=DuplicateLocationHash.Exists(locations[polygon_indices[i][0]]);
 		duplicates[1]=DuplicateLocationHash.Exists(locations[polygon_indices[i][1]]);

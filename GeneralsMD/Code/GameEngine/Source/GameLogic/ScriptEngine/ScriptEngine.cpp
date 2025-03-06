@@ -30,7 +30,7 @@
 
 #include "common/DataChunk.h"
 #include "Common/File.h"
-#include "Common/FileSystem.h"
+#include "Common/FileSystemEA.h"
 #include "Common/GameEngine.h"
 #include "Common/GameState.h"
 #include "Common/LatchRestore.h"
@@ -7883,14 +7883,15 @@ void ScriptEngine::setSequentialTimer(Team *team, Int frameCount)
 
 void ScriptEngine::evaluateAndProgressAllSequentialScripts( void )
 {
-	VecSequentialScriptPtrIt it, lastIt;
-	lastIt = m_sequentialScripts.end();
-
 	Int spinCount = 0;
-	for (it = m_sequentialScripts.begin(); it != m_sequentialScripts.end(); /* empty */) {
-		if (it == lastIt) {
+	auto it = m_sequentialScripts.begin();
+
+	// jmarshall don't store lastit causes a crash.
+	while (it != m_sequentialScripts.end()) {
+		if (it == m_sequentialScripts.end()) {
 			++spinCount;
-		} else {
+		}
+		else {
 			spinCount = 0;
 		}
 
@@ -7904,7 +7905,7 @@ void ScriptEngine::evaluateAndProgressAllSequentialScripts( void )
 			continue;
 		}
 
-		lastIt = it;
+		// jmarshall end
 		
 		Bool itAdvanced = false;
 

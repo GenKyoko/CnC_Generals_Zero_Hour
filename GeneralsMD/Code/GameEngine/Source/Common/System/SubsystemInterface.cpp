@@ -146,8 +146,11 @@ void SubsystemInterfaceList::addSubsystem(SubsystemInterface* sys)
 void SubsystemInterfaceList::removeSubsystem(SubsystemInterface* sys)
 {
 #ifdef DUMP_PERF_STATS
-	for (SubsystemList::iterator it = m_allSubsystems.begin(); it != m_subsystems.end(); ++it)
+	for (SubsystemList::const_iterator it = m_allSubsystems.begin();it != m_allSubsystems.end(); ++it)
 	{	 
+		if (m_allSubsystems.empty())
+			break;
+
 		if ( (*it) == sys) {
 			m_allSubsystems.erase(it);
 			break;

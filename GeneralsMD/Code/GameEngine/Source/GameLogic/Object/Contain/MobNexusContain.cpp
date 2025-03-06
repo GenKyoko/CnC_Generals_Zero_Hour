@@ -157,7 +157,7 @@ Bool MobNexusContain::isValidContainerFor(const Object* rider, Bool checkCapacit
 		{
 			ContainedItemsList::const_iterator it;
 			it = items->begin();
-			if( *it )
+			if( it != items->end() && *it )
 			{
 				//Replace the object we are checking with the *first* object contained within it.
 				rider = *it;

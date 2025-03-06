@@ -61,7 +61,7 @@ enum
 #include <assetmgr.h>
 #include <texture.h>
 #include "Common/MapReaderWriterInfo.h"
-#include "Common/FileSystem.h" 
+#include "Common/FileSystemEA.h" 
 #include "Common/file.h"
 #include "Common/PerfTimer.h"
 #include "Common/Player.h"
@@ -81,8 +81,7 @@ enum
 #include "W3DDevice/GameClient/W3DShroud.h"
 #include "W3DDevice/GameClient/W3DProjectedShadow.h"
 #include "WW3D2/Camera.h"
-#include "WW3D2/DX8Wrapper.h"
-#include "WW3D2/DX8Renderer.h"
+#include "GameRenderer.h"
 #include "WW3D2/Matinfo.h"
 #include "WW3D2/Mesh.h"
 #include "WW3D2/MeshMdl.h"
@@ -1906,7 +1905,7 @@ void W3DTreeBuffer::updateTopplingTree(TTree *tree)
 		// Hit so either bounce or stop if too little remaining velocity.
 		tree->m_angularVelocity *= -d->m_bounceVelocityPercent;
 
-		if( BitTest( tree->m_options, W3D_TOPPLE_OPTIONS_NO_BOUNCE ) == TRUE || 
+		if( BitTestEA( tree->m_options, W3D_TOPPLE_OPTIONS_NO_BOUNCE ) == TRUE || 
 				fabs(tree->m_angularVelocity) < VELOCITY_BOUNCE_LIMIT )
 		{
 			// too slow, just stop
@@ -1919,7 +1918,7 @@ void W3DTreeBuffer::updateTopplingTree(TTree *tree)
 		else if( fabs(tree->m_angularVelocity) >= VELOCITY_BOUNCE_SOUND_LIMIT )
 		{
 			// fast enough bounce to warrant the bounce fx
-			if( BitTest( tree->m_options, W3D_TOPPLE_OPTIONS_NO_FX ) == FALSE ) {
+			if( BitTestEA( tree->m_options, W3D_TOPPLE_OPTIONS_NO_FX ) == FALSE ) {
 				Vector3 loc(0, 0, 3*TREE_RADIUS_APPROX); // Kinda towards the top of the tree. jba. [7/11/2003]
 				Vector3 xloc;
 				tree->m_mtx.Transform_Vector(tree->m_mtx, loc, &xloc);

@@ -36,8 +36,7 @@
  * Functions:                                                                                  *
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
-#include "dx8fvf.h"
-#include "dx8wrapper.h"
+#include "GameRenderer.h"
 #include "assetmgr.h"
 #include "rinfo.h"
 #include "camera.h"

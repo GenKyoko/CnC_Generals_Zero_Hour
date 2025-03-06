@@ -22,7 +22,7 @@
 // $Revision: #2 $
 // $DateTime: 2003/08/12 15:05:00 $
 //
-// ©2003 Electronic Arts
+// Â©2003 Electronic Arts
 //
 // Profile module command interface
 //////////////////////////////////////////////////////////////////////////////
@@ -135,7 +135,8 @@ bool ProfileCmdInterface::Execute(class Debug& dbg, const char *cmd, CommandMode
     }
     else
     {
-      for (unsigned k=0;k<numResIf;k++)
+      unsigned k = 0;
+      for (;k<numResIf;k++)
         if (!strcmp(argv[0],resIf[k].name))
           break;
       if (k==numResIf)
@@ -203,7 +204,8 @@ bool ProfileCmdInterface::Execute(class Debug& dbg, const char *cmd, CommandMode
     // must fixup lastPatternEntry now
     if (Profile::firstPatternEntry)
     {
-      for (Profile::PatternListEntry *cur=Profile::firstPatternEntry;cur->next;cur=cur->next);
+      Profile::PatternListEntry* cur = Profile::firstPatternEntry;
+      for (;cur->next;cur=cur->next);
       Profile::lastPatternEntry=cur;
     }
     else

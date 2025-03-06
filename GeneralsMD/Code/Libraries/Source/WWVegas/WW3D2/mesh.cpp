@@ -113,12 +113,9 @@
 #include "inttest.h"
 #include "decalmsh.h"
 #include "decalsys.h"
-#include "dx8polygonrenderer.h"
-#include "dx8indexbuffer.h"
-#include "dx8renderer.h"
+#include "GameRenderer.h"
 #include "visrasterizer.h"
 #include "wwmemlog.h"
-#include "dx8rendererdebugger.h"
 #include <stdio.h>
 #include <wwprofile.h>
 

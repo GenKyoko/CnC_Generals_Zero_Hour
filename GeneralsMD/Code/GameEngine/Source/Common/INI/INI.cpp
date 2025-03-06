@@ -36,7 +36,7 @@
 
 #include "Common/DamageFX.h"
 #include "Common/File.h"
-#include "Common/FileSystem.h"
+#include "Common/FileSystemEA.h"
 #include "Common/GameAudio.h"
 #include "Common/Science.h"
 #include "Common/SpecialPower.h"
@@ -323,7 +323,8 @@ static INIBlockParse findBlockParse(const char* token)
 //-------------------------------------------------------------------------------------------------
 static INIFieldParseProc findFieldParse(const FieldParse* parseTable, const char* token, int& offset, const void*& userData)
 {
-	for (const FieldParse* parse = parseTable; parse->token; ++parse)
+	const FieldParse* parse = parseTable;
+	for (; parse->token; ++parse)
 	{
 		if (strcmp( parse->token, token ) == 0)
 		{
@@ -377,16 +378,16 @@ void INI::load( AsciiString filename, INILoadType loadType, Xfer *pXfer )
 					#if defined(_DEBUG) || defined(_INTERNAL)
 					strcpy(m_curBlockStart, m_buffer);
 					#endif
-					try {
+					//try {
 						(*parse)( this );
 
-					} catch (...) {
+					/*} catch (...) {
 						DEBUG_CRASH(("Error parsing block '%s' in INI file '%s'\n", token, m_filename.str()) );
 						char buff[1024];
 						sprintf(buff, "Error parsing INI file '%s' (Line: '%s')\n", m_filename.str(), currentLine.str());
 
 						throw INIException(buff);
-					}
+					}*/
 					#if defined(_DEBUG) || defined(_INTERNAL)
 						strcpy(m_curBlockStart, "NO_BLOCK");
 					#endif
@@ -1504,7 +1505,7 @@ void INI::initFromINIMulti( void *what, const MultiIniFieldParse& parseTableList
 				for (int ptIdx = 0; ptIdx < parseTableList.getCount(); ++ptIdx)
 				{
 					int offset = 0;
-					void* userData = 0;
+					const void* userData = 0;
 					INIFieldParseProc parse = findFieldParse(parseTableList.getNthFieldParse(ptIdx), field, offset, userData);
 					if (parse)
 					{

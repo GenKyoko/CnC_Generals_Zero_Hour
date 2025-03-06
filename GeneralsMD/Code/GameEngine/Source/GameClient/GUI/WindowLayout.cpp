@@ -84,7 +84,6 @@ void WindowLayout::hide( Bool hide )
 	// hide or unhide all windows in this layout
 	for( window = m_windowList; window; window = window->winGetNextInLayout() )
 	{
-
 		window->winHide( hide );
 
 	}  // end for window

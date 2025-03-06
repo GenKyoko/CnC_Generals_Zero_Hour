@@ -84,7 +84,7 @@
 #include "W3DDevice/GameClient/Module/W3DModelDraw.h"
 #include "W3DDevice/GameClient/W3DCustomScene.h"
 
-#include "WW3D2/DX8Renderer.h"
+#include "GameRenderer.h"
 #include "WW3D2/Light.h"
 #include "WW3D2/Camera.h"
 #include "WW3D2/Coltype.h"
@@ -2222,7 +2222,7 @@ Drawable *W3DView::pickDrawable( const ICoord2D *screen, Bool forceAttack, PickT
 	while (window)
 	{
 		// check to see if it or any of its parents are opaque.  If so, we can't select anything.
-		if (!BitTest( window->winGetStatus(), WIN_STATUS_SEE_THRU ))
+		if (!BitTestEA( window->winGetStatus(), WIN_STATUS_SEE_THRU ))
 			return NULL;
 
 		window = window->winGetParent();

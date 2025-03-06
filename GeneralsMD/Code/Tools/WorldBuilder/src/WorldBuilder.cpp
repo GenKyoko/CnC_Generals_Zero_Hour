@@ -37,7 +37,7 @@
 #include "common/GlobalData.h"
 #include "WHeightMapEdit.h"
 //#include "Common/GameFileSystem.h"
-#include "Common/FileSystem.h"
+#include "Common/FileSystemEA.h"
 #include "Common/ArchiveFileSystem.h"
 #include "Common/LocalFileSystem.h"
 #include "Common/CDManager.h"
@@ -76,7 +76,7 @@
 
 #include "W3DDevice/Common/W3DModuleFactory.h"
 #include "W3DDevice/GameClient/W3DParticleSys.h"
-#include "MilesAudioDevice/MilesAudioManager.h"
+#include "OpenALAudioDevice/OpenALAudioManager.h"
 
 #include <io.h>
 #include "win32device/GameClient/Win32Mouse.h"
@@ -399,7 +399,7 @@ BOOL CWorldBuilderApp::InitInstance()
 
 	// need this before TheAudio in case we're running off of CD - TheAudio can try to open Music.big on the CD...
 	initSubsystem(TheCDManager, CreateCDManager(), NULL);
-	initSubsystem(TheAudio, (AudioManager*)new MilesAudioManager());
+	initSubsystem(TheAudio, (AudioManager*)new OpenALAudioManager());
 	if (!TheAudio->isMusicAlreadyLoaded())
 		return FALSE;
 

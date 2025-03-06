@@ -40,7 +40,7 @@
 
 #include "Common/CRC.h"
 #include "Common/File.h"
-#include "Common/FileSystem.h"
+#include "Common/FileSystemEA.h"
 #include "Common/GameAudio.h"
 #include "Common/INI.h"
 #include "Common/registry.h"
@@ -571,7 +571,7 @@ GlobalData::GlobalData()
 	m_debugCashValueMap = FALSE;
 	m_maxDebugValue = 10000;
 	m_debugCashValueMapTileDuration = LOGICFRAMES_PER_SECOND; // Changed By Sadullah Nader
-	m_debugIgnoreAsserts = FALSE;
+	m_debugIgnoreAsserts = TRUE;
 	m_debugIgnoreStackTrace = FALSE;
 	m_vTune = false;
 	m_checkForLeaks = TRUE;
@@ -607,9 +607,9 @@ GlobalData::GlobalData()
 	m_dumpAssetUsage = FALSE;
 	m_framesPerSecondLimit = 0;
 	m_chipSetType = 0;
-	m_windowed = 0;
-	m_xResolution = 800;
-	m_yResolution = 600;
+	m_windowed = TRUE;
+	m_xResolution = 1280;
+	m_yResolution = 720;
 	m_maxShellScreens = 0;
 	m_useCloudMap = FALSE;
 	m_use3WayTerrainBlends = 1;

@@ -73,8 +73,7 @@ public:
 	bool		IsCameraShaking(void);
 	void		Update_Camera_Shaker(Vector3 camera_position, Vector3 * shaker_angles);
 
-protected:
-
+public:
 	/**
 	** CameraShakerClass 
 	** This class encapsulates the current state of a camera shaker.  It is a multi-list object

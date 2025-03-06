@@ -74,7 +74,7 @@
 #include "camera.h"
 #include "ww3d.h"
 #include "matrix4.h"
-#include "dx8wrapper.h"
+#include "GameRenderer.h"
 
 
 /***********************************************************************************************
@@ -633,10 +633,9 @@ void CameraClass::Update_Frustum(void) const
 
 	// Update the projection matrix
 	if (Projection == PERSPECTIVE) {
-
-		ProjectionTransform.Init_Perspective(	vpmin.X*znear_dist, vpmax.X*znear_dist,
-															vpmin.Y*znear_dist, vpmax.Y*znear_dist,
-															znear_dist, zfar_dist );
+		ProjectionTransform.Init_PerspectiveProjection(vpmin.X * znear_dist, vpmax.X * znear_dist,
+			vpmin.Y * znear_dist, vpmax.Y * znear_dist,
+			znear_dist, zfar_dist);
 
 	} else {
 		

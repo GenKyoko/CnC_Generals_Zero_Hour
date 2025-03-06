@@ -296,8 +296,9 @@ void AsciiString::format_va(const char* format, va_list args)
 {
 	validate();
 	char buf[MAX_FORMAT_BUF_LEN];
-  if (_vsnprintf(buf, sizeof(buf)/sizeof(char)-1, format, args) < 0)
-			throw ERROR_OUT_OF_MEMORY;
+  /*if (_vsnprintf(buf, sizeof(buf)/sizeof(char)-1, format, args) < 0)
+			throw ERROR_OUT_OF_MEMORY;*/
+	_vsnprintf(buf, MAX_FORMAT_BUF_LEN - 1, format, args);
 	set(buf);
 	validate();
 }

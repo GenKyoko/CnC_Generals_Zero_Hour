@@ -54,7 +54,7 @@
 #include "common/GlobalData.h"
 #include "common/RandomValue.h"
 //#include "Common/GameFileSystem.h"
-#include "Common/FileSystem.h" // for LOAD_TEST_ASSETS
+#include "Common/FileSystemEA.h" // for LOAD_TEST_ASSETS
 #include "GameClient/TerrainRoads.h"
 #include "W3DDevice/GameClient/TerrainTex.h"
 #include "W3DDevice/GameClient/HeightMap.h"
@@ -63,8 +63,7 @@
 #include "W3DDevice/GameClient/WorldHeightMap.h"
 #include "W3DDevice/GameClient/W3DShaderManager.h"
 #include "WW3D2/Camera.h"
-#include "WW3D2/DX8Wrapper.h"
-#include "WW3D2/DX8Renderer.h"
+#include "GameRenderer.h"
 #include "WW3D2/Mesh.h"
 #include "WW3D2/MeshMdl.h"
 

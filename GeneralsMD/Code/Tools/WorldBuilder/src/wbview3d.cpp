@@ -34,11 +34,7 @@
 #include "part_ldr.h"
 #include "rendobj.h"
 #include "hanim.h"
-#include "dx8wrapper.h"
-#include "dx8indexbuffer.h"
-#include "dx8vertexbuffer.h"
-#include "dx8renderer.h"
-#include "dx8fvf.h"
+#include "GameRenderer.h"
 #include "vertmaterial.h"
 #include "font3d.h"
 #include "render2d.h"
@@ -85,7 +81,7 @@
 #include "Common/WellKnownKeys.h"
 #include "Common/ThingTemplate.h"
 #include "Common/Language.h"
-#include "Common/FileSystem.h"
+#include "Common/FileSystemEA.h"
 #include "Common/PlayerTemplate.h"
 #include "GameLogic/SidesList.h"
 #include "GameLogic/TerrainLogic.h"
@@ -95,7 +91,7 @@
 #include "ImpassableOptions.h"
 
 
-#include <d3dx8.h>
+#include "../../Libraries/DX90SDK/Include/d3dx8.h"
 
 #ifdef _INTERNAL
 // for occasional debugging...

@@ -31,7 +31,7 @@
 #include "PreRTS.h"
 
 #include "Common/File.h"
-#include "Common/FileSystem.h"
+#include "Common/FileSystemEA.h"
 #include "Common/GameState.h"
 #include "Common/GameStateMap.h"
 #include "Common/GlobalData.h"

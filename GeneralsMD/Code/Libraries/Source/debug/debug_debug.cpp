@@ -22,7 +22,7 @@
 // $Revision: #2 $
 // $DateTime: 2003/07/09 10:57:23 $
 //
-// ©2003 Electronic Arts
+// Â©2003 Electronic Arts
 //
 // Debug class implementation
 //////////////////////////////////////////////////////////////////////////////
@@ -908,7 +908,7 @@ Debug& Debug::operator<<(const MemDump &dump)
       continue;
     operator<<(" ");
     curByte=cur;
-    for (k=0;k<itemPerLine;k++,curByte+=dump.m_bytePerItem)
+    for (unsigned k=0;k<itemPerLine;k++,curByte+=dump.m_bytePerItem)
     {
       if (k+i>=dump.m_numItems)
         break;
@@ -971,7 +971,8 @@ void Debug::AddHResultTranslator(unsigned prio, HResultTranslator func, void *us
 
   // now find the right place to insert the translator
   // (slow but this function is not time critical)
-  for (unsigned k=0;k<Instance.numHrTranslators;++k)
+  unsigned k = 0;
+  for (;k<Instance.numHrTranslators;++k)
     if (Instance.hrTranslators[k].prio<prio)
       break;
 
@@ -1220,7 +1221,8 @@ const char *Debug::AddLogGroup(const char *fileOrGroup, const char *descr)
   }
 
   // is that log group known?
-  for (KnownLogGroupList *cur=firstLogGroup;cur;cur=cur->next)
+  KnownLogGroupList* cur = firstLogGroup;
+  for (;cur;cur=cur->next)
   {
     if (!strcmp(cur->nameGroup,fileOrGroup))
     {

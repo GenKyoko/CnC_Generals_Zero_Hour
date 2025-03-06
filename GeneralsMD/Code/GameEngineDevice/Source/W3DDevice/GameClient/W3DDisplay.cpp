@@ -44,7 +44,7 @@ static void drawFramerateBar(void);
 #include "Common/GameEngine.h"
 #include "Common/GlobalData.h"
 #include "Common/PerfTimer.h"
-#include "Common/FileSystem.h"
+#include "Common/FileSystemEA.h"
 #include "Common/LocalFileSystem.h"
 #include "Common/Player.h"
 #include "Common/PlayerList.h"
@@ -86,13 +86,12 @@ static void drawFramerateBar(void);
 #include "WW3D2/PredLod.h"
 #include "WW3D2/Part_Emt.h"
 #include "WW3D2/Part_Ldr.h"
-#include "WW3D2/DX8Caps.h"
+#include "GameRenderer.h"
 #include "WW3D2/WW3DFormat.h"
 #include "WW3D2/agg_def.h"
 #include "WW3D2/Render2DSentence.h"
 #include "WW3D2/SortingRenderer.h"
 #include "WW3D2/Textureloader.h"
-#include "WW3D2/DX8WebBrowser.h"
 #include "WW3D2/Mesh.h"
 #include "WW3D2/HLOD.h"
 #include "WW3D2/Meshmatdesc.h"
@@ -462,13 +461,13 @@ W3DDisplay::~W3DDisplay()
 	delete m_assetManager;
 	WW3D::Shutdown();
 	WWMath::Shutdown();
-	DX8WebBrowser::Shutdown();
+	//DX8WebBrowser::Shutdown();
 	delete TheW3DFileSystem;
 	TheW3DFileSystem = NULL;
 
 }  // end ~W3DDisplay
 
-#define MIN_DISPLAY_RESOLUTION_X	800
+#define MIN_DISPLAY_RESOLUTION_X	1280
 #define MIN_DISPLAY_RESOLUTOIN_Y	600
 
 
@@ -506,8 +505,7 @@ Int W3DDisplay::getDisplayModeCount(void)
 	for (int res = 0; res < resolutions.Count ();  res ++)
 	{
 		// Is this the resolution we are looking for?
-		if (resolutions[res].BitDepth >= 24 && resolutions[res].Width >= MIN_DISPLAY_RESOLUTION_X 
-      && IS_FOUR_BY_THREE_ASPECT( (Real)resolutions[res].Width, (Real)resolutions[res].Height ) )	//only accept 4:3 aspect ratio modes.
+		if (resolutions[res].BitDepth >= 24 && resolutions[res].Width >= MIN_DISPLAY_RESOLUTION_X)	//only accept 4:3 aspect ratio modes.
 		{	
 			numResolutions++;
 		}
@@ -525,8 +523,7 @@ void W3DDisplay::getDisplayModeDescription(Int modeIndex, Int *xres, Int *yres, 
 	for (int res = 0; res < resolutions.Count ();  res ++)
 	{
 		// Is this the resolution we are looking for?
-		if ( resolutions[res].BitDepth >= 24 && resolutions[res].Width >= MIN_DISPLAY_RESOLUTION_X 
-      && IS_FOUR_BY_THREE_ASPECT( (Real)resolutions[res].Width, (Real)resolutions[res].Height ) )	//only accept 4:3 aspect ratio modes.
+		if ( resolutions[res].BitDepth >= 24 && resolutions[res].Width >= MIN_DISPLAY_RESOLUTION_X )	//only accept 4:3 aspect ratio modes.
 		{	
 			if (numResolutions == modeIndex)
 			{	//found the mode
@@ -824,7 +821,7 @@ void W3DDisplay::init( void )
 		m_nativeDebugDisplay->setFontWidth( 9 );
 	}
 
-	DX8WebBrowser::Initialize();
+	//DX8WebBrowser::Initialize();
 
 	// we're now online
 	m_initialized = true;
@@ -1461,7 +1458,7 @@ void W3DDisplay::gatherDebugStats( void )
 
 			unibuffer.concat( L"\nModelStates: " );
 			ModelConditionFlags mcFlags = draw->getModelConditionFlags();
-			const numEntriesPerLine = 4;
+			const int32_t numEntriesPerLine = 4;
 			int lineCount = 0;
 
 			for( int i = 0; i < MODELCONDITION_COUNT; i++ )
@@ -1557,7 +1554,7 @@ void W3DDisplay::drawCurrentDebugDisplay( void )
 		if ( m_debugDisplay && m_debugDisplayCallback )
 		{
 			m_debugDisplay->reset();
-			m_debugDisplayCallback( m_debugDisplay, m_debugDisplayUserData );
+			m_debugDisplayCallback( m_debugDisplay, m_debugDisplayUserData, NULL);
 		}
 	}
 }  // end drawCurrentDebugDisplay
@@ -2666,7 +2663,7 @@ void W3DDisplay::drawImage( const Image *image, Int startX, Int startY,
 	}
 
 	// if we have raw texture data we will use it, otherwise we are referencing filenames
-	if( BitTest( image->getStatus(), IMAGE_STATUS_RAW_TEXTURE ) )
+	if( BitTestEA( image->getStatus(), IMAGE_STATUS_RAW_TEXTURE ) )
 		m_2DRender->Set_Texture( (TextureClass *)(image->getRawTextureData()) );
 	else
 		m_2DRender->Set_Texture( image->getFilename().str() );
@@ -2688,7 +2685,7 @@ void W3DDisplay::drawImage( const Image *image, Int startX, Int startY,
 			RectClass clipped_rect;
 			RectClass clipped_uv_rect;
 
-			if( BitTest( image->getStatus(), IMAGE_STATUS_ROTATED_90_CLOCKWISE ) )
+			if( BitTestEA( image->getStatus(), IMAGE_STATUS_ROTATED_90_CLOCKWISE ) )
 			{
 
 	
@@ -2756,7 +2753,7 @@ void W3DDisplay::drawImage( const Image *image, Int startX, Int startY,
 	}
 
 	// if rotated 90 degrees clockwise we have to adjust the uv coords
-	if( BitTest( image->getStatus(), IMAGE_STATUS_ROTATED_90_CLOCKWISE ) )
+	if( BitTestEA( image->getStatus(), IMAGE_STATUS_ROTATED_90_CLOCKWISE ) )
 	{
 
 		m_2DRender->Add_Tri( Vector2( screen_rect.Left, screen_rect.Top ), 

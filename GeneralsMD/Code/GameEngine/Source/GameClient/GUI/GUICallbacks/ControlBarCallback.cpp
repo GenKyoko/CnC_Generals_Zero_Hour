@@ -105,7 +105,7 @@ WindowMsgHandledType LeftHUDInput( GameWindow *window, UnsignedInt msg,
 			const CommandButton *command = TheInGameUI->getGUICommand();
 			if( command 
 					&& (command->getCommandType() == GUI_COMMAND_SPECIAL_POWER || command->getCommandType() == GUI_COMMAND_SPECIAL_POWER_FROM_SHORTCUT)
-					&& BitTest( command->getOptions(), NEED_TARGET_POS ) )
+					&& BitTestEA( command->getOptions(), NEED_TARGET_POS ) )
 				targeting = TRUE;
 
 			if( targeting == FALSE )
@@ -178,7 +178,7 @@ WindowMsgHandledType LeftHUDInput( GameWindow *window, UnsignedInt msg,
 				const CommandButton *command = TheInGameUI->getGUICommand();
 				if( command 
 						&& (command->getCommandType() == GUI_COMMAND_SPECIAL_POWER || command->getCommandType() == GUI_COMMAND_SPECIAL_POWER_FROM_SHORTCUT)
-						&& BitTest( command->getOptions(), NEED_TARGET_POS ) )
+						&& BitTestEA( command->getOptions(), NEED_TARGET_POS ) )
 				{
 					Int index = TheMouse->getCursorIndex( command->getCursorName() );
 
@@ -276,7 +276,7 @@ WindowMsgHandledType LeftHUDInput( GameWindow *window, UnsignedInt msg,
 				const CommandButton *command = TheInGameUI->getGUICommand();
 				if( command 
 					&& (command->getCommandType() == GUI_COMMAND_SPECIAL_POWER || command->getCommandType() == GUI_COMMAND_SPECIAL_POWER_FROM_SHORTCUT)
-					&& BitTest( command->getOptions(), NEED_TARGET_POS ) 
+					&& BitTestEA( command->getOptions(), NEED_TARGET_POS ) 
 					)
 				{
 
@@ -511,7 +511,7 @@ void ShowControlBar( Bool immediate )
 		if (window)
 		{	
 			TheControlBar->switchControlBarStage(CONTROL_BAR_STAGE_DEFAULT);
-			TheTacticalView->setHeight((Int)(TheDisplay->getHeight() * 0.80f));
+			TheTacticalView->setHeight((Int)(TheDisplay->getHeight()));
 			if (TheControlBar->m_animateWindowManager && !immediate)
 			{
 				TheControlBar->m_animateWindowManager->reset();
@@ -546,7 +546,7 @@ void HideControlBar( Bool immediate )
 		if (window)
 		{
 #ifdef SLIDE_LETTERBOX
-				TheTacticalView->setHeight((Int)(TheDisplay->getHeight() * 0.80f)); 
+				TheTacticalView->setHeight((Int)(TheDisplay->getHeight())); 
 #else
 				TheTacticalView->setHeight(TheDisplay->getHeight());
 #endif

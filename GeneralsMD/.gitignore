@@ -101,3 +101,6 @@ generatedVersion.h
 *.ncb
 *.opt
 *.plg
+
+# add files
+![Rr]un/OpenAL32.dll

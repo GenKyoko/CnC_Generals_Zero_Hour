@@ -524,9 +524,10 @@ void PlayerListDlg::updateTheUI(void)
 	{
 		CComboBox *factions = (CComboBox*)GetDlgItem(IDC_PLAYERFACTION);
 		factions->ResetContent();
+		int32_t i = 0;
 		if (ThePlayerTemplateStore)
 		{
-			for (i = 0; i < ThePlayerTemplateStore->getPlayerTemplateCount(); i++)
+			for (; i < ThePlayerTemplateStore->getPlayerTemplateCount(); i++)
 			{
 				AsciiString nm = ThePlayerTemplateStore->getNthPlayerTemplate(i)->getName();
 				factions->AddString(nm.str());
@@ -556,7 +557,7 @@ void PlayerListDlg::updateTheUI(void)
 	regardMe->ResetContent();
 	const char* rstr;
 	AsciiString pname;
-	for (i = 0; i < m_sides.getNumSides(); i++)
+	for (int32_t i = 0; i < m_sides.getNumSides(); i++)
 	{
 		pname = m_sides.getSideInfo(i)->getDict()->getAsciiString(TheKey_playerName);
 		if (pname.isEmpty() || pname == cur_pname)
@@ -689,7 +690,8 @@ void PlayerListDlg::OnSelectPlayerColor()
 		pCombo->GetWindowText(str);
 		Int index = -1;
 		Int numColors = TheMultiplayerSettings->getNumColors();
-		for (Int c=0; c<numColors; ++c)
+		Int c = 0;
+		for (; c<numColors; ++c)
 		{
 			MultiplayerColorDefinition *def = TheMultiplayerSettings->getColor(c);
 			if (!def)
@@ -845,7 +847,7 @@ static void addSide(SidesList *sides, AsciiString faction,
 
 		Dict newPlayerDict;
 		UnicodeString playerUStr;
-		playerUStr = playerUName;
+		playerUStr = (const wchar_t*)playerUName;
 		newPlayerDict.setAsciiString(TheKey_playerName, playerName);
 		newPlayerDict.setBool(TheKey_playerIsHuman, false);
 		newPlayerDict.setUnicodeString(TheKey_playerDisplayName, playerUStr);
@@ -865,19 +867,19 @@ void PlayerListDlg::OnAddskirmishplayers()
 {
 	// PlyrCivilian
 
-	addSide(&m_sides, "FactionCivilian", "PlyrCivilian", L"PlyrCivilian");
-	addSide(&m_sides, "FactionAmerica", "SkirmishAmerica", L"SkirmishAmerica");
-	addSide(&m_sides, "FactionChina", "SkirmishChina", L"SkirmishChina");
-	addSide(&m_sides, "FactionGLA", "SkirmishGLA", L"SkirmishGLA");
+	addSide(&m_sides, "FactionCivilian", "PlyrCivilian", (UnsignedShort*)L"PlyrCivilian");
+	addSide(&m_sides, "FactionAmerica", "SkirmishAmerica", (UnsignedShort*)L"SkirmishAmerica");
+	addSide(&m_sides, "FactionChina", "SkirmishChina", (UnsignedShort*)L"SkirmishChina");
+	addSide(&m_sides, "FactionGLA", "SkirmishGLA", (UnsignedShort*)L"SkirmishGLA");
 
-	addSide(&m_sides, "FactionAmericaAirForceGeneral", "SkirmishAmericaAirForceGeneral", L"SkirmishAmericaAirForceGeneral");
-	addSide(&m_sides, "FactionAmericaLaserGeneral", "SkirmishAmericaLaserGeneral", L"SkirmishAmericaLaserGeneral");
-	addSide(&m_sides, "FactionAmericaSuperWeaponGeneral", "SkirmishAmericaSuperWeaponGeneral", L"SkirmishAmericaSuperWeaponGeneral");
-	addSide(&m_sides, "FactionChinaTankGeneral", "SkirmishChinaTankGeneral", L"SkirmishChinaTankGeneral");
-	addSide(&m_sides, "FactionChinaNukeGeneral", "SkirmishChinaNukeGeneral", L"SkirmishChinaNukeGeneral");
-	addSide(&m_sides, "FactionChinaInfantryGeneral", "SkirmishChinaInfantryGeneral", L"SkirmishChinaInfantryGeneral");
-	addSide(&m_sides, "FactionGLADemolitionGeneral", "SkirmishGLADemolitionGeneral", L"SkirmishGLADemolitionGeneral");
-	addSide(&m_sides, "FactionGLAToxinGeneral", "SkirmishGLAToxinGeneral", L"SkirmishGLAToxinGeneral");
-	addSide(&m_sides, "FactionGLAStealthGeneral", "SkirmishGLAStealthGeneral", L"SkirmishGLAStealthGeneral");
+	addSide(&m_sides, "FactionAmericaAirForceGeneral", "SkirmishAmericaAirForceGeneral", (UnsignedShort*)L"SkirmishAmericaAirForceGeneral");
+	addSide(&m_sides, "FactionAmericaLaserGeneral", "SkirmishAmericaLaserGeneral", (UnsignedShort*)L"SkirmishAmericaLaserGeneral");
+	addSide(&m_sides, "FactionAmericaSuperWeaponGeneral", "SkirmishAmericaSuperWeaponGeneral", (UnsignedShort*)L"SkirmishAmericaSuperWeaponGeneral");
+	addSide(&m_sides, "FactionChinaTankGeneral", "SkirmishChinaTankGeneral", (UnsignedShort*)L"SkirmishChinaTankGeneral");
+	addSide(&m_sides, "FactionChinaNukeGeneral", "SkirmishChinaNukeGeneral", (UnsignedShort*)L"SkirmishChinaNukeGeneral");
+	addSide(&m_sides, "FactionChinaInfantryGeneral", "SkirmishChinaInfantryGeneral", (UnsignedShort*)L"SkirmishChinaInfantryGeneral");
+	addSide(&m_sides, "FactionGLADemolitionGeneral", "SkirmishGLADemolitionGeneral", (UnsignedShort*)L"SkirmishGLADemolitionGeneral");
+	addSide(&m_sides, "FactionGLAToxinGeneral", "SkirmishGLAToxinGeneral", (UnsignedShort*)L"SkirmishGLAToxinGeneral");
+	addSide(&m_sides, "FactionGLAStealthGeneral", "SkirmishGLAStealthGeneral", (UnsignedShort*)L"SkirmishGLAStealthGeneral");
 	updateTheUI();
 }

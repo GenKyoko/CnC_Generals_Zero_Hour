@@ -206,7 +206,7 @@ void ControlBar::populatePurchaseScience( Player* player )
 		commandButton = commandSet1->getCommandButton(i);
 
 		// if button is not present, just hide the window
-		if( commandButton == NULL || BitTest( commandButton->getOptions(), SCRIPT_ONLY ) )
+		if( commandButton == NULL || BitTestEA( commandButton->getOptions(), SCRIPT_ONLY ) )
 		{
 			// hide window on interface
 			m_sciencePurchaseWindowsRank1[ i ]->winHide( TRUE );
@@ -266,7 +266,7 @@ void ControlBar::populatePurchaseScience( Player* player )
 		commandButton = commandSet3->getCommandButton(i);
 
 		// if button is not present, just hide the window
-		if( commandButton == NULL || BitTest( commandButton->getOptions(), SCRIPT_ONLY ) )
+		if( commandButton == NULL || BitTestEA( commandButton->getOptions(), SCRIPT_ONLY ) )
 		{
 			// hide window on interface
 			m_sciencePurchaseWindowsRank3[ i ]->winHide( TRUE );
@@ -329,7 +329,7 @@ void ControlBar::populatePurchaseScience( Player* player )
 		commandButton = commandSet8->getCommandButton(i);
 
 		// if button is not present, just hide the window
-		if( commandButton == NULL || BitTest( commandButton->getOptions(), SCRIPT_ONLY ) )
+		if( commandButton == NULL || BitTestEA( commandButton->getOptions(), SCRIPT_ONLY ) )
 		{
 			// hide window on interface
 			m_sciencePurchaseWindowsRank8[ i ]->winHide( TRUE );
@@ -638,7 +638,7 @@ Bool CommandButton::isValidToUseOn(const Object *sourceObj, const Object *target
 		return false;
 	}
 
-	if( BitTest( m_options, COMMAND_OPTION_NEED_OBJECT_TARGET ) && !targetObj ) 
+	if( BitTestEA( m_options, COMMAND_OPTION_NEED_OBJECT_TARGET ) && !targetObj ) 
 	{
 		return false;
 	}
@@ -649,7 +649,7 @@ Bool CommandButton::isValidToUseOn(const Object *sourceObj, const Object *target
 		pos.set( targetLocation );
 	}
 
-	if( BitTest( m_options, NEED_TARGET_POS ) && !targetLocation ) 
+	if( BitTestEA( m_options, NEED_TARGET_POS ) && !targetLocation ) 
 	{
 		if( targetObj )
 		{
@@ -661,12 +661,12 @@ Bool CommandButton::isValidToUseOn(const Object *sourceObj, const Object *target
 		}
 	}
 	
-	if( BitTest( m_options, COMMAND_OPTION_NEED_OBJECT_TARGET ) ) 
+	if( BitTestEA( m_options, COMMAND_OPTION_NEED_OBJECT_TARGET ) ) 
 	{
 		return TheActionManager->canDoSpecialPowerAtObject( sourceObj, targetObj, commandSource, m_specialPower, m_options, false );
 	}
 
-	if( BitTest( m_options, NEED_TARGET_POS ) ) 
+	if( BitTestEA( m_options, NEED_TARGET_POS ) ) 
 	{
 		return TheActionManager->canDoSpecialPowerAtLocation( sourceObj, &pos, commandSource, m_specialPower, NULL, m_options, false );
 	}
@@ -729,7 +729,7 @@ const FieldParse CommandSet::m_commandSetFieldParseTable[] =
 //-------------------------------------------------------------------------------------------------
 Bool CommandButton::isContextCommand() const
 {
-	return BitTest( m_options, CONTEXTMODE_COMMAND );
+	return BitTestEA( m_options, CONTEXTMODE_COMMAND );
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -1107,11 +1107,10 @@ void ControlBar::init( void )
 		m_contextParent[ CP_OBSERVER_INFO ] = TheWindowManager->winGetWindowFromId( NULL, id );
 
 
-		// get the command windows and save for easy access later
-		Int i;
+		// get the command windows and save for easy access later-
 		ICoord2D commandSize, commandPos;
 		AsciiString windowName;
-		for( i = 0; i < MAX_COMMANDS_PER_SET; i++ )
+		for(Int i = 0; i < MAX_COMMANDS_PER_SET; i++ )
 		{
 		
 			windowName.format( "ControlBar.wnd:ButtonCommand%02d", i + 1 );
@@ -1139,7 +1138,7 @@ void ControlBar::init( void )
 		}  // end for i
 
 
-		for( i = 0; i < MAX_PURCHASE_SCIENCE_RANK_1; i++ )
+		for(Int i = 0; i < MAX_PURCHASE_SCIENCE_RANK_1; i++ )
 		{
 			windowName.format( "GeneralsExpPoints.wnd:ButtonRank1Number%d", i );
 			id = TheNameKeyGenerator->nameToKey( windowName.str() );
@@ -1147,7 +1146,7 @@ void ControlBar::init( void )
 				TheWindowManager->winGetWindowFromId( m_contextParent[ CP_PURCHASE_SCIENCE ], id );
 			m_sciencePurchaseWindowsRank1[ i ]->winSetStatus( WIN_STATUS_USE_OVERLAY_STATES );
 		}  // end for i
-		for( i = 0; i < MAX_PURCHASE_SCIENCE_RANK_3; i++ )
+		for(Int  i = 0; i < MAX_PURCHASE_SCIENCE_RANK_3; i++ )
 		{
 			windowName.format( "GeneralsExpPoints.wnd:ButtonRank3Number%d", i );
 			id = TheNameKeyGenerator->nameToKey( windowName.str() );
@@ -1156,13 +1155,15 @@ void ControlBar::init( void )
 			m_sciencePurchaseWindowsRank3[ i ]->winSetStatus( WIN_STATUS_USE_OVERLAY_STATES );
 		}  // end for i
 		
-		for( i = 0; i < MAX_PURCHASE_SCIENCE_RANK_8; i++ ) 
+		for(Int i = 0; i < MAX_PURCHASE_SCIENCE_RANK_8; i++ )
 		{
 			windowName.format( "GeneralsExpPoints.wnd:ButtonRank8Number%d", i );
 			id = TheNameKeyGenerator->nameToKey( windowName.str() );
 			m_sciencePurchaseWindowsRank8[ i ] = 
 				TheWindowManager->winGetWindowFromId( m_contextParent[ CP_PURCHASE_SCIENCE ], id );
 			m_sciencePurchaseWindowsRank8[ i ]->winSetStatus( WIN_STATUS_USE_OVERLAY_STATES );
+			if (i == MAX_PURCHASE_SCIENCE_RANK_8 - 1)
+				break;
 		}  // end for i
 
 		// keep a pointer to the window making up the right HUD display
@@ -1174,7 +1175,7 @@ void ControlBar::init( void )
 		
 		id = TheNameKeyGenerator->nameToKey( "ControlBar.wnd:CameoWindow" );
 		m_rightHUDCameoWindow = TheWindowManager->winGetWindowFromId( NULL, id );
-		for( i = 0; i < MAX_RIGHT_HUD_UPGRADE_CAMEOS; i++ )
+		for(Int  i = 0; i < MAX_RIGHT_HUD_UPGRADE_CAMEOS; i++ )
 		{
 			windowName.format( "ControlBar.wnd:UnitUpgrade%d", i+1 );
 			id = TheNameKeyGenerator->nameToKey( windowName.str() );
@@ -2449,7 +2450,7 @@ void ControlBar::setControlCommand( GameWindow *button, const CommandButton *com
 	// set the button gadget control to be a normal button or a check like button if
 	// the command says it needs one
 	//
-	if( BitTest( commandButton->getOptions(), CHECK_LIKE ))
+	if( BitTestEA( commandButton->getOptions(), CHECK_LIKE ))
 		GadgetButtonEnableCheckLike( button, TRUE, FALSE );
 	else
 		GadgetButtonEnableCheckLike( button, FALSE, FALSE );
@@ -3030,7 +3031,10 @@ void ControlBar::setDefaultControlBarConfig( void )
 //		m_controlBarSchemeManager->setControlBarSchemeByPlayerTemplate(ThePlayerList->getLocalPlayer()->getPlayerTemplate(), FALSE);
 //	}
 	m_currentControlBarStage = CONTROL_BAR_STAGE_DEFAULT;
-	TheTacticalView->setHeight((Int)(TheDisplay->getHeight() * 0.80f)); 
+	// jmarshall - this optimization is no longer needed.
+	//TheTacticalView->setHeight((Int)(TheDisplay->getHeight() * 0.80f)); 
+	TheTacticalView->setHeight((Int)(TheDisplay->getHeight()));
+	// jmarshall end
 	m_contextParent[ CP_MASTER ]->winSetPosition(m_defaultControlBarPosition.x, m_defaultControlBarPosition.y);
 	m_contextParent[ CP_MASTER ]->winHide(FALSE);
 	repopulateBuildTooltipLayout();
@@ -3196,7 +3200,7 @@ void ControlBar::triggerRadarAttackGlow( void )
 		return;
 	m_radarAttackGlowOn = TRUE;
 	m_remainingRadarAttackGlowFrames = RADAR_ATTACK_GLOW_FRAMES;
-	if(BitTest(m_radarAttackGlowWindow->winGetStatus(),WIN_STATUS_ENABLED) == TRUE)
+	if(BitTestEA(m_radarAttackGlowWindow->winGetStatus(),WIN_STATUS_ENABLED) == TRUE)
 		m_radarAttackGlowWindow->winEnable(FALSE);
 }
 
@@ -3214,7 +3218,7 @@ void ControlBar::updateRadarAttackGlow ( void )
 	
 	if(m_remainingRadarAttackGlowFrames % RADAR_ATTACK_GLOW_NUM_TIMES == 0)
 	{
-		m_radarAttackGlowWindow->winEnable(!BitTest(m_radarAttackGlowWindow->winGetStatus(),WIN_STATUS_ENABLED));
+		m_radarAttackGlowWindow->winEnable(!BitTestEA(m_radarAttackGlowWindow->winGetStatus(),WIN_STATUS_ENABLED));
 	}
 
 	
@@ -3259,7 +3263,7 @@ void ControlBar::initSpecialPowershortcutBar( Player *player)
 	parentName = layoutName;
 	parentName.concat(":ButtonParent%d");
 	m_currentlyUsedSpecialPowersButtons = MIN(pt->getSpecialPowerShortcutButtonCount(), MAX_SPECIAL_POWER_SHORTCUTS);
-	for( i = 0; i < MAX_SPECIAL_POWER_SHORTCUTS; i++ )
+	for(Int i = 0; i < MAX_SPECIAL_POWER_SHORTCUTS; i++ )
 	{
 		windowName.format( tempName, i+1 );
 		id = TheNameKeyGenerator->nameToKey( windowName.str() );
@@ -3320,7 +3324,7 @@ void ControlBar::populateSpecialPowerShortcut( Player *player)
 		else
 		{
 
-			if( BitTest( commandButton->getOptions(), NEED_UPGRADE ) )
+			if( BitTestEA( commandButton->getOptions(), NEED_UPGRADE ) )
 			{
 				const UpgradeTemplate *upgrade = commandButton->getUpgradeTemplate();
 				if( upgrade && !ThePlayerList->getLocalPlayer()->hasUpgradeComplete( upgrade->getUpgradeMask() ) )
@@ -3335,7 +3339,7 @@ void ControlBar::populateSpecialPowerShortcut( Player *player)
 			// commands that require sciences we don't have are hidden so they never show up
 			// cause we can never pick "another" general technology throughout the game
 			//
-			if( BitTest( commandButton->getOptions(), NEED_SPECIAL_POWER_SCIENCE ) )
+			if( BitTestEA( commandButton->getOptions(), NEED_SPECIAL_POWER_SCIENCE ) )
 			{
 				const SpecialPowerTemplate *power = commandButton->getSpecialPowerTemplate();
 

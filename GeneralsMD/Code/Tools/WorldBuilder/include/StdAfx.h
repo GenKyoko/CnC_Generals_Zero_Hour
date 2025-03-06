@@ -30,9 +30,12 @@
 
 #define VC_EXTRALEAN		// Exclude rarely-used stuff from Windows headers
 
+#define _d3d9TYPES_H_ // jmarshall - #ugly af
 
 // To prevent pragma errors.
 #include "lib/Basetype.h"
+
+#include <stdint.h>
 
 #include <afxwin.h>         // MFC core and standard components
 #include <afxext.h>         // MFC extensions

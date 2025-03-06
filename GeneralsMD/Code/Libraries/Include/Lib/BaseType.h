@@ -32,8 +32,18 @@
 #ifndef _BASE_TYPE_H_
 #define _BASE_TYPE_H_
 
+#ifndef __PLACEMENT_VEC_NEW_INLINE
+#define __PLACEMENT_VEC_NEW_INLINE
+#endif
+
+#ifndef _SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS
+#define _SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS
+#endif
+
 #include <math.h>
 #include <string.h>
+#include <unordered_map>
+#include <stdint.h>
 
 /*
 **	Turn off some unneeded warnings.
@@ -127,7 +137,7 @@ typedef unsigned int			UnsignedInt;	  	// 4 bytes
 typedef unsigned short		UnsignedShort;		// 2 bytes 
 typedef short							Short;					  // 2 bytes 
 typedef unsigned char			UnsignedByte;			// 1 byte		USED TO BE "Byte"
-typedef char							Byte;							// 1 byte		USED TO BE "SignedByte"
+typedef unsigned char					Byte;							// 1 byte		USED TO BE "SignedByte"
 typedef char							Char;							// 1 byte of text
 typedef bool							Bool;							// 
 // note, the types below should use "long long", but MSVC doesn't support it yet
@@ -169,7 +179,8 @@ inline Real deg2rad(Real rad) { return rad * (PI/180); }
 //-----------------------------------------------------------------------------
 // For twiddling bits
 //-----------------------------------------------------------------------------
-#define BitTest( x, i ) ( ( (x) & (i) ) != 0 )
+#undef BitTest
+#define BitTestEA( x, i ) ( ( (x) & (i) ) != 0 )
 #define BitSet( x, i ) ( (x) |= (i) )
 #define BitClear( x, i ) ( (x ) &= ~(i) )
 #define BitToggle( x, i ) ( (x) ^= (i) )

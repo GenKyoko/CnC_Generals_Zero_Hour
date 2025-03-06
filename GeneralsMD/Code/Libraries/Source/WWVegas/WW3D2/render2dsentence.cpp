@@ -39,7 +39,7 @@
 #include "texture.h"
 #include "wwprofile.h"
 #include "wwmemlog.h"
-#include "dx8wrapper.h"
+#include "GameRenderer.h"
 
 #ifdef _INTERNAL
 // for occasional debugging...
@@ -1220,7 +1220,7 @@ FontCharsClass::FontCharsClass (void) :
 FontCharsClass::~FontCharsClass (void) 
 {
 	while ( BufferList.Count() ) {
-		delete [] BufferList[0];
+		delete BufferList[0];
 		BufferList.Delete(0);
 	}
 
@@ -1720,8 +1720,8 @@ FontCharsClass::Grow_Unicode_Array (WCHAR ch)
 		return ;
 	} 
 
-	uint16 first_index	= min( FirstUnicodeChar, ch );
-	uint16 last_index		= max( LastUnicodeChar, ch );
+	uint16 first_index	= min( FirstUnicodeChar, (uint16)ch );
+	uint16 last_index		= max( LastUnicodeChar, (uint16)ch );
 	uint16 count			= (last_index - first_index) + 1;
 
 	//

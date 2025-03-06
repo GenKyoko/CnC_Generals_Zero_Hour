@@ -53,12 +53,11 @@
 #include "always.h"
 #include "rendobj.h"
 #include "w3d_file.h"
-#include "dx8vertexbuffer.h"
-#include "dx8indexbuffer.h"
+#include "GameRenderer.h"
 #include "shader.h"
 #include "vertmaterial.h"
 //#include "common/GameFileSystem.h"
-#include "Common/FileSystem.h" // for LOAD_TEST_ASSETS
+#include "Common/FileSystemEA.h" // for LOAD_TEST_ASSETS
 #include "Lib/BaseType.h"
 #include "common/GameType.h"
 #include "Common/AsciiString.h"

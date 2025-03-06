@@ -188,7 +188,7 @@ CBCommandStatus ControlBar::processCommandUI( GameWindow *control,
 
 	//@todo Kris -- Special case code so convoy trucks can detonate nuke trucks -- if other things need this,
 	//rethink it.
-	if( obj && BitTest( commandButton->getOptions(), SINGLE_USE_COMMAND ) )
+	if( obj && BitTestEA( commandButton->getOptions(), SINGLE_USE_COMMAND ) )
 	{
 		/** @todo Added obj check because Single Use and Multi Select crash when used together, but with this check
 			* they just won't work.  When the "rethinking" occurs, this can get fixed.  Right now it is unused.
@@ -213,7 +213,7 @@ CBCommandStatus ControlBar::processCommandUI( GameWindow *control,
 		TheAudio->addAudioEvent( &sound );
 	}
 
-	if( BitTest( commandButton->getOptions(), COMMAND_OPTION_NEED_TARGET ) )
+	if( BitTestEA( commandButton->getOptions(), COMMAND_OPTION_NEED_TARGET ) )
 	{
 		if (commandButton->getOptions() & USES_MINE_CLEARING_WEAPONSET)
 		{
@@ -682,17 +682,22 @@ CBCommandStatus ControlBar::processCommandUI( GameWindow *control,
 		{
 			Int i;
 			ObjectID objID;
+			bool finded = false;
 
 			//
 			// find the object ID that wants to exit by scanning through the transport data and looking
 			// for the matching control button
 			//
 			for( i = 0; i < MAX_COMMANDS_PER_SET; i++ )
-				if( m_containData[ i ].control == control )
-					objID = m_containData[ i ].objectID;
+				if (m_containData[i].control == control)
+				{
+					objID = m_containData[i].objectID;
+					finded = true;
+				}
 
 			// get the actual object
-			Object *objWantingExit = TheGameLogic->findObjectByID( objID );
+			Object* objWantingExit = finded ? 
+				TheGameLogic->findObjectByID(objID) : NULL;
 			
 			// if object is not found remove inventory entry and exit
 			if( objWantingExit == NULL )
@@ -725,7 +730,7 @@ CBCommandStatus ControlBar::processCommandUI( GameWindow *control,
 			// Cancel GUI command mode.
 			TheInGameUI->setGUICommand( NULL );
 
-			if (BitTest(commandButton->getOptions(), NEED_TARGET_POS) == FALSE) {
+			if (BitTestEA(commandButton->getOptions(), NEED_TARGET_POS) == FALSE) {
 				pickAndPlayUnitVoiceResponse( TheInGameUI->getAllSelectedDrawables(), GameMessage::MSG_EVACUATE );
 				TheMessageStream->appendMessage( GameMessage::MSG_EVACUATE );
 			}

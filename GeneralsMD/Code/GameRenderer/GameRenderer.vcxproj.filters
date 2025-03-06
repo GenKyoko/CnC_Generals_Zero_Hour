@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="dx8\dx8caps.cpp">
+      <Filter>dx8</Filter>
+    </ClCompile>
+    <ClCompile Include="dx8\dx8fvf.cpp">
+      <Filter>dx8</Filter>
+    </ClCompile>
+    <ClCompile Include="dx8\dx8indexbuffer.cpp">
+      <Filter>dx8</Filter>
+    </ClCompile>
+    <ClCompile Include="dx8\dx8polygonrenderer.cpp">
+      <Filter>dx8</Filter>
+    </ClCompile>
+    <ClCompile Include="dx8\dx8renderer.cpp">
+      <Filter>dx8</Filter>
+    </ClCompile>
+    <ClCompile Include="dx8\dx8rendererdebugger.cpp">
+      <Filter>dx8</Filter>
+    </ClCompile>
+    <ClCompile Include="dx8\dx8texman.cpp">
+      <Filter>dx8</Filter>
+    </ClCompile>
+    <ClCompile Include="dx8\dx8vertexbuffer.cpp">
+      <Filter>dx8</Filter>
+    </ClCompile>
+    <ClCompile Include="dx8\dx8webbrowser.cpp">
+      <Filter>dx8</Filter>
+    </ClCompile>
+    <ClCompile Include="dx8\dx8wrapper.cpp">
+      <Filter>dx8</Filter>
+    </ClCompile>
+    <ClCompile Include="d3d8to9\d3d8to9.cpp">
+      <Filter>d3d8to9</Filter>
+    </ClCompile>
+    <ClCompile Include="d3d8to9\d3d8to9_base.cpp">
+      <Filter>d3d8to9</Filter>
+    </ClCompile>
+    <ClCompile Include="d3d8to9\d3d8to9_device.cpp">
+      <Filter>d3d8to9</Filter>
+    </ClCompile>
+    <ClCompile Include="d3d8to9\d3d8to9_index_buffer.cpp">
+      <Filter>d3d8to9</Filter>
+    </ClCompile>
+    <ClCompile Include="d3d8to9\d3d8to9_surface.cpp">
+      <Filter>d3d8to9</Filter>
+    </ClCompile>
+    <ClCompile Include="d3d8to9\d3d8to9_swap_chain.cpp">
+      <Filter>d3d8to9</Filter>
+    </ClCompile>
+    <ClCompile Include="d3d8to9\d3d8to9_texture.cpp">
+      <Filter>d3d8to9</Filter>
+    </ClCompile>
+    <ClCompile Include="d3d8to9\d3d8to9_vertex_buffer.cpp">
+      <Filter>d3d8to9</Filter>
+    </ClCompile>
+    <ClCompile Include="d3d8to9\d3d8to9_volume.cpp">
+      <Filter>d3d8to9</Filter>
+    </ClCompile>
+    <ClCompile Include="d3d8to9\d3d8types.cpp">
+      <Filter>d3d8to9</Filter>
+    </ClCompile>
+    <ClCompile Include="d3d8to9\interface_query.cpp">
+      <Filter>d3d8to9</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GameRenderer.h" />
+    <ClInclude Include="dx8\dx8caps.h">
+      <Filter>dx8</Filter>
+    </ClInclude>
+    <ClInclude Include="dx8\dx8fvf.h">
+      <Filter>dx8</Filter>
+    </ClInclude>
+    <ClInclude Include="dx8\dx8indexbuffer.h">
+      <Filter>dx8</Filter>
+    </ClInclude>
+    <ClInclude Include="dx8\dx8list.h">
+      <Filter>dx8</Filter>
+    </ClInclude>
+    <ClInclude Include="dx8\dx8polygonrenderer.h">
+      <Filter>dx8</Filter>
+    </ClInclude>
+    <ClInclude Include="dx8\dx8renderer.h">
+      <Filter>dx8</Filter>
+    </ClInclude>
+    <ClInclude Include="dx8\dx8rendererdebugger.h">
+      <Filter>dx8</Filter>
+    </ClInclude>
+    <ClInclude Include="dx8\dx8texman.h">
+      <Filter>dx8</Filter>
+    </ClInclude>
+    <ClInclude Include="dx8\dx8vertexbuffer.h">
+      <Filter>dx8</Filter>
+    </ClInclude>
+    <ClInclude Include="dx8\dx8webbrowser.h">
+      <Filter>dx8</Filter>
+    </ClInclude>
+    <ClInclude Include="dx8\dx8wrapper.h">
+      <Filter>dx8</Filter>
+    </ClInclude>
+    <ClInclude Include="d3d8to9\d3d8.hpp">
+      <Filter>d3d8to9</Filter>
+    </ClInclude>
+    <ClInclude Include="d3d8to9\d3d8to9.hpp">
+      <Filter>d3d8to9</Filter>
+    </ClInclude>
+    <ClInclude Include="d3d8to9\d3d8types.hpp">
+      <Filter>d3d8to9</Filter>
+    </ClInclude>
+    <ClInclude Include="d3d8to9\d3dx9.hpp">
+      <Filter>d3d8to9</Filter>
+    </ClInclude>
+    <ClInclude Include="d3d8to9\interface_query.hpp">
+      <Filter>d3d8to9</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="dx8\DX8 Rationalizations.txt">
+      <Filter>dx8</Filter>
+    </Text>
+    <Text Include="dx8\DX8 Status.txt">
+      <Filter>dx8</Filter>
+    </Text>
+    <Text Include="dx8\DX8ToolModifications.txt">
+      <Filter>dx8</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="dx8">
+      <UniqueIdentifier>{120e17b7-fec8-4850-afad-183810bd8d56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="d3d8to9">
+      <UniqueIdentifier>{7fb5cb4f-dc60-4234-a274-1574f3d6bd93}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

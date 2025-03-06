@@ -44,7 +44,7 @@
 #include <d3d8.h>
 #include <stdio.h>
 #include <D3dx8core.h>
-#include "dx8wrapper.h"
+#include "GameRenderer.h"
 #include "targa.h"
 #include <nstrdup.h>
 #include "w3d_file.h"
@@ -53,8 +53,6 @@
 #include "textureloader.h"
 #include "missingtexture.h"
 #include "ffactory.h"
-#include "dx8caps.h"
-#include "dx8texman.h"
 #include "meshmatdesc.h"
 #include "texturethumbnail.h"
 #include "wwprofile.h"
@@ -111,7 +109,6 @@ TextureBaseClass::TextureBaseClass
 {
 }
 
-
 //**********************************************************************************************
 //! Base texture class destructor
 /*! KJM
@@ -123,7 +120,7 @@ TextureBaseClass::~TextureBaseClass(void)
 	delete ThumbnailLoadTask;
 	ThumbnailLoadTask=NULL;
 
-	if (D3DTexture) 
+	if (D3DTexture)
 	{
 		D3DTexture->Release();
 		D3DTexture = NULL;

@@ -107,7 +107,7 @@ RailroadBehavior::RailroadBehavior( Thing *thing, const ModuleData *moduleData )
 {
 	const RailroadBehaviorModuleData *modData = getRailroadBehaviorModuleData();
 
-	m_carriageTemplateNameIterator = 0;
+	//m_carriageTemplateNameIterator = 0; // jmarshall
 
 	m_nextStationTask = DO_NOTHING;
 	m_trailerID = INVALID_ID;
@@ -1422,12 +1422,16 @@ void RailroadBehavior::FindPosByPathDistance( Coord3D *pos, const Real dist, con
 
 	std::list<TrackPoint>::const_iterator pointIter = pointList->begin();
 
-
+	// ?
 	while ( pointIter != pointList->end() ) 
 	{
 		const TrackPoint *thisPoint = &(*pointIter);
 		++pointIter;// next pointIter in this list, so then...
-		const TrackPoint *nextPoint = &(*pointIter);
+
+		// shit, program has more damaged.
+		const TrackPoint* nextPoint = nullptr;
+		if(pointIter != pointList->end())
+			nextPoint = &(*pointIter);
 
 
 		if (thisPoint && thisPoint->m_distanceFromFirst < actualDistance)// I am after this point, and

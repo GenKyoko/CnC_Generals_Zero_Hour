@@ -54,7 +54,7 @@
 #include "meshmdl.h"
 #include "part_emt.h"
 #include "vertmaterial.h"
-#include "dx8wrapper.h"
+#include "GameRenderer.h"
 #include "texture.h"
 #include "surfaceclass.h"
 #include "textureloader.h"
@@ -796,7 +796,7 @@ RenderObjClass * W3DAssetManager::Create_Render_Obj(
 	{	
 		// If we didn't find one, try to load on demand
 		char filename [MAX_PATH];
-		char *mesh_name = ::strchr (name, '.');
+		const char *mesh_name = ::strchr (name, '.');
 		if (mesh_name != NULL) 
 		{
 			::lstrcpyn(filename, name, ((int)mesh_name) - ((int)name) + 1);
@@ -1005,7 +1005,7 @@ void W3DAssetManager::Recolor_Vertex_Material(VertexMaterialClass *vmat, const i
 
 #ifdef DUMP_PERF_STATS
 __int64 Total_Load_3D_Assets=0;
-static Load_3D_Asset_Recursions=0;
+static int64_t Load_3D_Asset_Recursions=0;
 #endif
 //---------------------------------------------------------------------
 bool W3DAssetManager::Load_3D_Assets( const char * filename )
@@ -1107,7 +1107,7 @@ bool W3DAssetManager::Load_3D_Assets( const char * filename )
 
 #ifdef DUMP_PERF_STATS
 __int64 Total_Get_HAnim_Time=0;
-static HAnim_Recursions=0;
+static int64_t HAnim_Recursions=0;
 #endif
 //---------------------------------------------------------------------
 HAnimClass *	W3DAssetManager::Get_HAnim(const char * name)
