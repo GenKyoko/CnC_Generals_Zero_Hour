@@ -30,8 +30,7 @@
 
 #include "Common/GameEngine.h"
 
-// Crash on exit temporary solution.
-bool QuitGame = false;
+extern bool QuitGame;
 
 /**
  * This is the entry point for the game system.
