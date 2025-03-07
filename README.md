@@ -12,14 +12,14 @@ EN
 
 ## 警告/warning
 CN
-目前该分支存在着大量严重问题，包括但不限于：
-- 在主菜单界面点击“退出游戏”时“D3DTexture”会出现释放问题，导致游戏崩溃。（已经使用临时方案解决）
-- 游戏崩溃有时会以奇怪的姿势发生
+- 目前该分支存在着大量严重问题，包括但不限于：
+	- 在主菜单界面点击“退出游戏”时“D3DTexture”会出现释放问题，导致游戏崩溃。（已经使用临时方案解决）
+	- 游戏崩溃有时会以奇怪的姿势发生
 
 EN
-There are currently a number of serious issues with the branch, including but not limited to:
-- When you click "Exit Game" on the main menu screen, "D3DTexture" will have a release issue, causing the game to crash. （已经使用临时方案解决）
-- Some game crashes are difficult to locate.
+- There are currently a number of serious issues with the branch, including but not limited to:
+	- When you click "Exit Game" on the main menu screen, "D3DTexture" will have a release issue, causing the game to crash. (It has been resolved using a temporary solution)
+	- Some game crashes are difficult to locate.
 
 ## 依赖/Dependencies
 该分支已经集成了大量依赖，无需额外添加。
@@ -29,12 +29,6 @@ The branch already has a large number of dependencies integrated and no addition
 ## Compiling (Win32 Only)
 
 To use the compiled binaries, you must own the game. The C&C Ultimate Collection is available for purchase on [EA App](https://www.ea.com/en-gb/games/command-and-conquer/command-and-conquer-the-ultimate-collection/buy/pc) or [Steam](https://store.steampowered.com/bundle/39394/Command__Conquer_The_Ultimate_Collection/).
-
-The quickest way to build all configurations in the project is to open `rts.dsw` in Microsoft Visual Studio C++ 6.0 (SP6 recommended for binary matching to Generals patch 1.08 and Zero Hour patch 1.04) and select Build -> Batch Build, then hit the “Rebuild All” button.
-
-If you wish to compile the code under a modern version of Microsoft Visual Studio, you can convert the legacy project file to a modern MSVC solution by opening `rts.dsw` in Microsoft Visual Studio .NET 2003, and then opening the newly created project and solution file in MSVC 2015 or newer.
-
-NOTE: As modern versions of MSVC enforce newer revisions of the C++ standard, you will need to make extensive changes to the codebase before it successfully compiles, even more so if you plan on compiling for the Win64 platform.
 
 When the workspace has finished building, the compiled binaries will be copied to the folder called `/Run/` found in the root of each games directory. 
 
