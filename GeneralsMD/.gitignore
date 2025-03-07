@@ -24,6 +24,9 @@ Max4Hybrid
 /Code/gameenginedevice/Lib/GameEngineDeviceDebug.lib
 /Code/gameenginedevice/Lib/GameEngineDeviceInternal.lib
 /Code/gameenginedevice/Lib/GameEngineDeviceProfile.lib
+/Code/gameenginerender/Lib/GameEngineRender.lib
+/Code/gameenginerender/Lib/GameEngineRenderDebug.lib
+/Code/gameenginerender/Lib/GameEngineRenderInternal.lib
 /Code/Libraries/Lib/Benchmark.lib
 /Code/Libraries/Lib/BenchmarkD.lib
 /Code/Libraries/Lib/EABrowserDispatch.lib

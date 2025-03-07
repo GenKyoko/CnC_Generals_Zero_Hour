@@ -75,6 +75,7 @@ typedef FilenameList::iterator FilenameListIter;
 #define MAP_PREVIEW_DIR_PATH "%sMapPreviews/"	///< We need a common place we can copy the map previews to at runtime.
 #define USER_W3D_DIR_PATH "%sW3D/"					///< .w3d files live here
 #define USER_TGA_DIR_PATH "%sTextures/"		///< User .tga texture files live here
+#define HD_TGA_DIR_PATH "Art/TexturesHD/"		///< HD .tga texture files live here
 
 // the following defines are only to be used while maintaining legacy compatability
 // with old files until they are completely gone and in the regular art set

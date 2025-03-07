@@ -72,7 +72,7 @@
 //#pragma MESSAGE("************************************** WARNING, optimization disabled for debugging purposes")
 #endif
 
-#define MIPMAP_BUMP_TEXTURE
+//#define MIPMAP_BUMP_TEXTURE
 
 // DEFINES ////////////////////////////////////////////////////////////////////////////////////////
 #define SKYPLANE_SIZE	(384.0f*MAP_XY_FACTOR)
@@ -434,7 +434,8 @@ HRESULT WaterRenderObjClass::initBumpMap(LPDIRECT3DTEXTURE8 *pTex, TextureClass 
     D3DLOCKED_RECT     d3dlr;
 	DWORD dwSrcPitch;
 	BYTE* pSrc;
-	Int numLevels;
+	Int i = 0;
+	/*Int numLevels;*/
 
 #ifdef MIPMAP_BUMP_TEXTURE
 
@@ -540,7 +541,7 @@ HRESULT WaterRenderObjClass::initBumpMap(LPDIRECT3DTEXTURE8 *pTex, TextureClass 
 	pSrc=(unsigned char *)surf->Lock((int *)&dwSrcPitch);
 
     // Create the bumpmap's surface and texture objects
-	m_pBumpTexture[i]=DX8Wrapper::_Create_DX8_Texture(d3dsd.Width,d3dsd.Height,WW3D_FORMAT_U8V8,TextureClass::MIP_LEVELS_1,D3DPOOL_MANAGED,false);
+	m_pBumpTexture[i]=DX8Wrapper::_Create_DX8_Texture(d3dsd.Width,d3dsd.Height,WW3D_FORMAT_U8V8,MipCountType::MIP_LEVELS_1,D3DPOOL_MANAGED,false);
 
     // Fill the bits of the new texture surface with bits from
     // a private format.

@@ -56,6 +56,7 @@ public:
 	virtual ~GameFileClass(void);
 
 	virtual char const * File_Name(void) const;
+	virtual char const* File_Path(void) const { return m_filePath; }
 	virtual char const * Set_Name(char const *filename);
 
 	// (gth) had to re-instate these functions in the base class, for now just give empty implementations...
