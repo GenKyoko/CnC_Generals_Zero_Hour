@@ -11,13 +11,14 @@ EN
 - jmarshall2323, jmarshall23, andrew-2e128 The creator of the forked repository or the contributor maintainer. ([jmarshall2323/CnC_Generals_Zero_Hour](https://github.com/jmarshall2323/CnC_Generals_Zero_Hour)) A lot of the patches in this repository come from this branch.
 
 ## 警告/warning
+CN
 目前该分支存在着大量严重问题，包括但不限于：
-- 在主菜单界面点击“退出游戏”时“D3DTexture”会出现释放问题，导致游戏崩溃。
+- 在主菜单界面点击“退出游戏”时“D3DTexture”会出现释放问题，导致游戏崩溃。（已经使用临时方案解决）
 - 游戏崩溃有时会以奇怪的姿势发生
 
 EN
 There are currently a number of serious issues with the branch, including but not limited to:
-- When you click "Exit Game" on the main menu screen, "D3DTexture" will have a release issue, causing the game to crash.
+- When you click "Exit Game" on the main menu screen, "D3DTexture" will have a release issue, causing the game to crash. （已经使用临时方案解决）
 - Some game crashes are difficult to locate.
 
 ## 依赖/Dependencies

@@ -71,7 +71,8 @@ State::State( StateMachine *machine, AsciiString name )
  */
 void State::friend_onCondition( StateTransFuncPtr test, StateID toStateID, void* userData, const char* description )
 {
-	m_transitions.push_back(TransitionInfo(test, toStateID, userData, description));
+	const auto target = TransitionInfo(test, toStateID, userData, description);
+	m_transitions.push_back(target);
 }
 
 
