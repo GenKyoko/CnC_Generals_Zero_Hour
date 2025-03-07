@@ -30,7 +30,7 @@
 
 #include "Common/GameEngine.h"
 
-// 崩溃问题临时解决方案
+// Crash on exit temporary solution.
 bool QuitGame = false;
 
 /**
