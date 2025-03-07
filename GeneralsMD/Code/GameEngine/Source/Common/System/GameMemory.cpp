@@ -229,27 +229,31 @@ static Int roundUpMemBound(Int i)
 
 //-----------------------------------------------------------------------------
 /** 
-	this is the low-level allocator that we use to request memory from the OS.
-	all (repeat, all) memory allocations in this module should ultimately
-	go thru this routine (or sysAllocate).
+	Low-level allocator that request memory from the OS.
+	All (repeat, all) memory allocations in this module should ultimately
+	go through this routine (or sysAllocate).
 
-	note: throws ERROR_OUT_OF_MEMORY on failure; never returns null
+	Note: throws ERROR_OUT_OF_MEMORY on failure; never returns null
 */
 static void* sysAllocateDoNotZero(Int numBytes)
 {
-	void* p = ::GlobalAlloc(GMEM_FIXED, numBytes);
+	HANDLE hHeap = GetProcessHeap();
+	// Use HEAP_ZERO_MEMORY so the returned memory is zeroed.
+	void* p = HeapAlloc(hHeap, HEAP_ZERO_MEMORY, numBytes);
 	if (!p)
 		throw ERROR_OUT_OF_MEMORY;
 #ifdef MEMORYPOOL_DEBUG
 	{
-		USE_PERF_TIMER(MemoryPoolDebugging)
-		#ifdef USE_FILLER_VALUE
+		// Retrieve the actual allocated size.
+		SIZE_T allocatedSize = HeapSize(hHeap, 0, p);
+#ifdef USE_FILLER_VALUE
+		USE_PERF_TIMER(MemoryPoolDebugging)=
 		{
 			USE_PERF_TIMER(MemoryPoolInitFilling)
-			::memset32(p, s_initFillerValue, ::GlobalSize(p));
+			::memset32(p, s_initFillerValue, allocatedSize);
 		}
-		#endif
-		theTotalSystemAllocationInBytes += ::GlobalSize(p);
+#endif
+		theTotalSystemAllocationInBytes += allocatedSize;
 		if (thePeakSystemAllocationInBytes < theTotalSystemAllocationInBytes)
 			thePeakSystemAllocationInBytes = theTotalSystemAllocationInBytes;
 	}
@@ -259,21 +263,23 @@ static void* sysAllocateDoNotZero(Int numBytes)
 
 //-----------------------------------------------------------------------------
 /** 
-	the counterpart to sysAllocate / sysAllocateDoNotZero; used to free blocks
-	allocated by them. it is OK to pass null here (it will just be ignored).
+	Frees blocks allocated by sysAllocate/sysAllocateDoNotZero; 
+	It is OK to pass null here (it will just be ignored).
 */
 static void sysFree(void* p)
 {
 	if (p)
 	{
+		HANDLE hHeap = GetProcessHeap();
 #ifdef MEMORYPOOL_DEBUG
 		{
+			SIZE_T allocatedSize = HeapSize(hHeap, 0, p);
 			USE_PERF_TIMER(MemoryPoolDebugging)
-			::memset32(p, GARBAGE_FILL_VALUE, ::GlobalSize(p));
-			theTotalSystemAllocationInBytes -= ::GlobalSize(p);
+			::memset32(p, GARBAGE_FILL_VALUE, allocatedSize);
+			theTotalSystemAllocationInBytes -= allocatedSize;
 		}
 #endif
-		::GlobalFree(p);
+		HeapFree(hHeap, 0, p);
 	}
 }
 
