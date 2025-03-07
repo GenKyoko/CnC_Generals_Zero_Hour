@@ -30,6 +30,8 @@
 
 #include "Common/GameEngine.h"
 
+// 崩溃问题临时解决方案
+bool QuitGame = false;
 
 /**
  * This is the entry point for the game system.
@@ -44,6 +46,7 @@ void GameMain( int argc, char *argv[] )
 	TheGameEngine->execute();
 
 	// since execute() returned, we are exiting the game
+	QuitGame = true;
 	delete TheGameEngine;
 	TheGameEngine = NULL;
 

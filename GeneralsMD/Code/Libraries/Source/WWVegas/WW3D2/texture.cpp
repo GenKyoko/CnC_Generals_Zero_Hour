@@ -72,6 +72,8 @@ static unsigned unused_texture_id;
 static unsigned TexturesAppliedPerFrame;
 const unsigned MAX_TEXTURES_APPLIED_PER_FRAME=2;
 
+extern bool QuitGame;
+
 
 /*!
  * KM General base constructor for texture classes
@@ -120,7 +122,8 @@ TextureBaseClass::~TextureBaseClass(void)
 	delete ThumbnailLoadTask;
 	ThumbnailLoadTask=NULL;
 
-	if (D3DTexture)
+	// Fixed a crash when exiting.
+	if (D3DTexture && !QuitGame)
 	{
 		D3DTexture->Release();
 		D3DTexture = NULL;
